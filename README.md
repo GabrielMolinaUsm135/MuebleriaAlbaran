@@ -86,7 +86,7 @@ Cada dimensión usa una **clave subrogada** entera como PK y conserva la clave d
 
 ### Diagrama
 
-![Diagrama_Dimensional](MuebleriaAlbaran\docs\Modelo Dimensional.png)
+![Diagrama_Dimensional](https://raw.githubusercontent.com/GabrielMolinaUsm135/MuebleriaAlbaran/refs/heads/main/docs/Modelo%20Dimensional.png)
 
 ## Proceso ETL - Fase 1
 
