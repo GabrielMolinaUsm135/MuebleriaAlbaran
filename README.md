@@ -16,7 +16,7 @@
 | Gabriel Molina | [GabrielMolinaUsm135](https://github.com/GabrielMolinaUsm135) |
 | Macarena Mogollón | [makimogollon](https://github.com/makimogollon) |
 | Lukas Cordova | [lukascordova](https://github.com/lukascordova) |
-| Daniel Garcia | `<COMPLETAR>` |
+| Daniel Garcia | GonzalezDanielRojas |
 
 ---
 
@@ -109,21 +109,6 @@ Primero se cargan las dimensiones (`Dim_Tiempo`, `Dim_Cliente`, `Dim_Producto`, 
 | Atributos derivados | `nombre_completo` en `Dim_Cliente`; `monto_total` en la tabla de hechos. |
 | Claves subrogadas | *Lookup* de la clave de origen hacia la clave subrogada al cargar la tabla de hechos. |
 
-### 5.3 Registros rechazados
-`COMPLETAR` (por ejemplo, tabla o archivo de errores donde se redirigen las filas que fallan el *Lookup* o la validación).
-
-### 5.4 Paquetes SSIS
-`COMPLETAR` lista de paquetes, por ejemplo:
-
-- `CargaDimTiempo.dtsx`
-- `CargaDimCliente.dtsx`
-- `CargaDimProducto.dtsx`
-- `CargaDimEmpleado.dtsx`
-- `CargaDimSucursal.dtsx`
-- `CargaFactDetalleVenta.dtsx`
-
----
-
 ## 6. Validación de la carga
 
 ```sql
@@ -144,16 +129,3 @@ FROM <BD_ORIGEN>.dbo.detalle_ventas;
 SELECT SUM(monto_total) AS monto_destino
 FROM <BD_DW>.dbo.Fact_Detalle_Venta;
 ```
-
-**Resultados obtenidos:** `COMPLETAR` (capturas en `docs/`).
-
----
-
-## 7. Distribución de responsabilidades y aportes
-
-| Integrante | Responsabilidades y principales aportes |
-|---|---|
-| Gabriel Molina | `COMPLETAR` |
-| Macarena Mogollón | `COMPLETAR` |
-| Lukas Cordova | `COMPLETAR` |
-| Daniel Garcia | `COMPLETAR` |
