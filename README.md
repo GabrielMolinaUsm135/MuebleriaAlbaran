@@ -86,29 +86,7 @@ Cada dimensión usa una **clave subrogada** entera como PK y conserva la clave d
 
 ### Diagrama
 
-```mermaid
-erDiagram
-    Dim_Cliente  ||--o{ Fact_Detalle_Venta : id_cliente
-    Dim_Producto ||--o{ Fact_Detalle_Venta : id_producto
-    Dim_Empleado ||--o{ Fact_Detalle_Venta : id_empleado
-    Dim_Sucursal ||--o{ Fact_Detalle_Venta : id_sucursal
-    Dim_Tiempo   ||--o{ Fact_Detalle_Venta : id_tiempo
-    Fact_Detalle_Venta {
-        int id_tiempo FK
-        int id_cliente FK
-        int id_empleado FK
-        int id_sucursal FK
-        int id_producto FK
-        int num_documento
-        string tipo_documento
-        int cantidad
-        decimal precio_unitario
-        decimal descuento
-        decimal monto_total
-    }
-```
-
-Imagen del diagrama: `docs/modelo-dimensional/` *(COMPLETAR con el archivo exportado)*.
+![Diagrama_Dimensional](MuebleriaAlbaran\docs\Modelo Dimensional.png)
 
 ## Proceso ETL - Fase 1
 
