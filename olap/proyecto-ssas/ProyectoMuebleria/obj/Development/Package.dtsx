@@ -1,0 +1,3269 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/14/2026 2:05:47 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-NA60IVQ"
+  DTS:CreatorName="DESKTOP-NA60IVQ\Granja Educativa"
+  DTS:DTSID="{841BBAFD-8FFD-4CFA-ACA4-17066BFA3F5D}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.521.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="10"
+  DTS:VersionGUID="{F1BB7C99-7B0F-4D60-93B2-9975422AFEF7}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-NA60IVQ.Albarran]"
+      DTS:CreationName="ODBC"
+      DTS:DTSID="{B24E61A8-C6FB-4401-A969-7EFB5DA642CA}"
+      DTS:ObjectName="DESKTOP-NA60IVQ.Albarran">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="server=DESKTOP-NA60IVQ;Driver={SQL Server};trusted_connection=Yes;app=Microsoft® Visual Studio®;wsid=DESKTOP-NA60IVQ;database=Albarran;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-NA60IVQ.DW_Albarran]"
+      DTS:CreationName="ODBC"
+      DTS:DTSID="{DCBDDDD7-C1AE-47BF-8E5E-3F4FCDA61E83}"
+      DTS:ObjectName="DESKTOP-NA60IVQ.DW_Albarran">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="server=DESKTOP-NA60IVQ;Driver={SQL Server};trusted_connection=Yes;app=Microsoft® Visual Studio®;wsid=DESKTOP-NA60IVQ;database=DW_Albarran;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.DW_Albarran]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{FEC84B16-CCD1-4E15-ADD2-FE9C25302EF2}"
+      DTS:ObjectName="LocalHost.DW_Albarran">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=.;Initial Catalog=DW_Albarran;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Dimension Clientes"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{2AAE8772-851D-45D0-BA72-404FB84FA28E}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Dimension Clientes">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Dimension Clientes\Destino DimCliente"
+              componentClassID="Microsoft.SSISODBCDst"
+              contactInfo="ODBC Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="ODBC Destination"
+              name="Destino DimCliente"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The name of the table to be fetched."
+                  expressionType="Notify"
+                  name="TableName">"dbo"."DimCliente"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows fetched per batch."
+                  expressionType="Notify"
+                  name="BatchSize">1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of rows inserted under the same transaction."
+                  expressionType="Notify"
+                  name="TransactionSize">1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines the chunk size allocation for LOB columns"
+                  expressionType="Notify"
+                  name="LobChunkSize">32768</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds to wait for an SQL statement to execute before returning to the application."
+                  expressionType="Notify"
+                  name="StatementTimeout">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The code page to use when code page information is unavailable from the data source."
+                  expressionType="Notify"
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Int32"
+                  description="The method used for inserting data. Possible values are 'Batch' or 'Row by row'."
+                  expressionType="Notify"
+                  name="InsertMethod">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The ODBC C data type for binding numeric data."
+                  expressionType="Notify"
+                  name="BindNumericAs">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines how the component would bind columns of (multi)-byte string types (i.e., SQL_CHAR, SQL_VARCHAR, SQL_LONGVARCHAR). The options are: Unicode (SQL_C_WCHAR) and ANSI (SQL_C_CHAR)."
+                  expressionType="Notify"
+                  name="BindCharColumnsAs">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Dimension Clientes\Destino DimCliente.Connections[ODBCConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-NA60IVQ.DW_Albarran]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-NA60IVQ.DW_Albarran]"
+                  description="The ODBC runtime connection used to access the database."
+                  name="ODBCConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Dimension Clientes\Destino DimCliente.Inputs[ODBC Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="ODBC Destination Input"
+                  truncationRowDisposition="FailComponent">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Dimension Clientes\Destino DimCliente.Inputs[ODBC Destination Input].Columns[sexo]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="sexo"
+                      externalMetadataColumnId="Package\Dimension Clientes\Destino DimCliente.Inputs[ODBC Destination Input].ExternalColumns[Sexo]"
+                      lineageId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].Columns[sexo]" />
+                    <inputColumn
+                      refId="Package\Dimension Clientes\Destino DimCliente.Inputs[ODBC Destination Input].Columns[estado_civil]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="estado_civil"
+                      externalMetadataColumnId="Package\Dimension Clientes\Destino DimCliente.Inputs[ODBC Destination Input].ExternalColumns[EstadoCivil]"
+                      lineageId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].Columns[estado_civil]" />
+                    <inputColumn
+                      refId="Package\Dimension Clientes\Destino DimCliente.Inputs[ODBC Destination Input].Columns[fecha_nacimiento]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="fecha_nacimiento"
+                      externalMetadataColumnId="Package\Dimension Clientes\Destino DimCliente.Inputs[ODBC Destination Input].ExternalColumns[FechaNacimiento]"
+                      lineageId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].Columns[fecha_nacimiento]" />
+                    <inputColumn
+                      refId="Package\Dimension Clientes\Destino DimCliente.Inputs[ODBC Destination Input].Columns[nombre]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="nombre"
+                      externalMetadataColumnId="Package\Dimension Clientes\Destino DimCliente.Inputs[ODBC Destination Input].ExternalColumns[NombreCompleto]"
+                      lineageId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].Columns[nombre]" />
+                    <inputColumn
+                      refId="Package\Dimension Clientes\Destino DimCliente.Inputs[ODBC Destination Input].Columns[cliente_id]"
+                      cachedDataType="i4"
+                      cachedName="cliente_id"
+                      externalMetadataColumnId="Package\Dimension Clientes\Destino DimCliente.Inputs[ODBC Destination Input].ExternalColumns[ClienteID_BK]"
+                      lineageId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].Columns[cliente_id]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Dimension Clientes\Destino DimCliente.Inputs[ODBC Destination Input].ExternalColumns[ClienteSK]"
+                      dataType="i4"
+                      name="ClienteSK" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Clientes\Destino DimCliente.Inputs[ODBC Destination Input].ExternalColumns[ClienteID_BK]"
+                      dataType="i4"
+                      name="ClienteID_BK" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Clientes\Destino DimCliente.Inputs[ODBC Destination Input].ExternalColumns[NombreCompleto]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      name="NombreCompleto" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Clientes\Destino DimCliente.Inputs[ODBC Destination Input].ExternalColumns[Sexo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="Sexo" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Clientes\Destino DimCliente.Inputs[ODBC Destination Input].ExternalColumns[EstadoCivil]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="EstadoCivil" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Clientes\Destino DimCliente.Inputs[ODBC Destination Input].ExternalColumns[FechaNacimiento]"
+                      dataType="wstr"
+                      length="10"
+                      name="FechaNacimiento" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Dimension Clientes\Destino DimCliente.Outputs[ODBC Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="ODBC Destination Error Output"
+                  synchronousInputId="Package\Dimension Clientes\Destino DimCliente.Inputs[ODBC Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Clientes\Destino DimCliente.Outputs[ODBC Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Clientes\Destino DimCliente.Outputs[ODBC Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dimension Clientes\Destino DimCliente.Outputs[ODBC Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Clientes\Destino DimCliente.Outputs[ODBC Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Dimension Clientes\Origen Cliente"
+              componentClassID="Microsoft.SSISODBCSrc"
+              contactInfo="ODBC Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="ODBC Source"
+              name="Origen Cliente"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The name of the table to be fetched."
+                  expressionType="Notify"
+                  name="TableName">"dbo"."clientes"</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows fetched per batch."
+                  expressionType="Notify"
+                  name="BatchSize">1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines the chunk size allocation for LOB columns"
+                  expressionType="Notify"
+                  name="LobChunkSize">32768</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines how the component exposes CHAR columns. If False, CHAR columns are exposed as (multi-)byte strings (DT_STR), if True, CHAR columns are exposed as wide strings (DT_WSTR)"
+                  expressionType="Notify"
+                  name="ExposeCharColumnsAsUnicode">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds to wait for an SQL statement to execute before returning to the application."
+                  expressionType="Notify"
+                  name="StatementTimeout">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The code page to use when code page information is unavailable from the data source."
+                  expressionType="Notify"
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Int32"
+                  description="The method used for fetching data."
+                  expressionType="Notify"
+                  name="FetchMethod">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="The ODBC C data type for binding numeric data."
+                  expressionType="Notify"
+                  name="BindNumericAs">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines how the component would bind columns of (multi)-byte string types (i.e., SQL_CHAR, SQL_VARCHAR, SQL_LONGVARCHAR). The options are: Unicode (SQL_C_WCHAR) and ANSI (SQL_C_CHAR)."
+                  expressionType="Notify"
+                  name="BindCharColumnsAs">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The mode used to access the database."
+                  expressionType="Notify"
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Dimension Clientes\Origen Cliente.Connections[ODBCConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-NA60IVQ.Albarran]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-NA60IVQ.Albarran]"
+                  description="The ODBC runtime connection used to access the database."
+                  name="ODBCConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output]"
+                  errorRowDisposition="FailComponent"
+                  name="ODBC Source Output"
+                  truncationRowDisposition="FailComponent">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].Columns[cliente_id]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].ExternalColumns[cliente_id]"
+                      lineageId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].Columns[cliente_id]"
+                      name="cliente_id" />
+                    <outputColumn
+                      refId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].Columns[nombre]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].ExternalColumns[nombre]"
+                      length="255"
+                      lineageId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].Columns[nombre]"
+                      name="nombre" />
+                    <outputColumn
+                      refId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].Columns[appaterno]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].ExternalColumns[appaterno]"
+                      length="255"
+                      lineageId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].Columns[appaterno]"
+                      name="appaterno" />
+                    <outputColumn
+                      refId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].Columns[apmaterno]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].ExternalColumns[apmaterno]"
+                      length="255"
+                      lineageId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].Columns[apmaterno]"
+                      name="apmaterno" />
+                    <outputColumn
+                      refId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].Columns[sexo]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].ExternalColumns[sexo]"
+                      length="1"
+                      lineageId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].Columns[sexo]"
+                      name="sexo" />
+                    <outputColumn
+                      refId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].Columns[fecha_nacimiento]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].ExternalColumns[fecha_nacimiento]"
+                      lineageId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].Columns[fecha_nacimiento]"
+                      name="fecha_nacimiento" />
+                    <outputColumn
+                      refId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].Columns[estado_civil]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].ExternalColumns[estado_civil]"
+                      length="255"
+                      lineageId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].Columns[estado_civil]"
+                      name="estado_civil" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].ExternalColumns[cliente_id]"
+                      dataType="i4"
+                      name="cliente_id" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].ExternalColumns[nombre]"
+                      dataType="wstr"
+                      length="255"
+                      name="nombre" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].ExternalColumns[appaterno]"
+                      dataType="wstr"
+                      length="255"
+                      name="appaterno" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].ExternalColumns[apmaterno]"
+                      dataType="wstr"
+                      length="255"
+                      name="apmaterno" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].ExternalColumns[sexo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="sexo" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].ExternalColumns[fecha_nacimiento]"
+                      dataType="dbTimeStamp"
+                      name="fecha_nacimiento" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].ExternalColumns[estado_civil]"
+                      dataType="wstr"
+                      length="255"
+                      name="estado_civil" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Error Output]"
+                  isErrorOut="true"
+                  name="ODBC Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Error Output].Columns[cliente_id]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].ExternalColumns[cliente_id]"
+                      lineageId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Error Output].Columns[cliente_id]"
+                      name="cliente_id" />
+                    <outputColumn
+                      refId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Error Output].Columns[nombre]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].ExternalColumns[nombre]"
+                      length="255"
+                      lineageId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Error Output].Columns[nombre]"
+                      name="nombre" />
+                    <outputColumn
+                      refId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Error Output].Columns[appaterno]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].ExternalColumns[appaterno]"
+                      length="255"
+                      lineageId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Error Output].Columns[appaterno]"
+                      name="appaterno" />
+                    <outputColumn
+                      refId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Error Output].Columns[apmaterno]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].ExternalColumns[apmaterno]"
+                      length="255"
+                      lineageId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Error Output].Columns[apmaterno]"
+                      name="apmaterno" />
+                    <outputColumn
+                      refId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Error Output].Columns[sexo]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].ExternalColumns[sexo]"
+                      length="1"
+                      lineageId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Error Output].Columns[sexo]"
+                      name="sexo" />
+                    <outputColumn
+                      refId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Error Output].Columns[fecha_nacimiento]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].ExternalColumns[fecha_nacimiento]"
+                      lineageId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Error Output].Columns[fecha_nacimiento]"
+                      name="fecha_nacimiento" />
+                    <outputColumn
+                      refId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Error Output].Columns[estado_civil]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output].ExternalColumns[estado_civil]"
+                      length="255"
+                      lineageId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Error Output].Columns[estado_civil]"
+                      name="estado_civil" />
+                    <outputColumn
+                      refId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Dimension Clientes.Paths[ODBC Source Output]"
+              endId="Package\Dimension Clientes\Destino DimCliente.Inputs[ODBC Destination Input]"
+              name="ODBC Source Output"
+              startId="Package\Dimension Clientes\Origen Cliente.Outputs[ODBC Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Dimension Producto"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{0578333d-fa84-48e9-bd94-1d2652363235}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Dimension Producto">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Dimension Producto\Destino DimProducto"
+              componentClassID="Microsoft.SSISODBCDst"
+              contactInfo="ODBC Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="ODBC Destination"
+              name="Destino DimProducto"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The name of the table to be fetched."
+                  expressionType="Notify"
+                  name="TableName">"dbo"."DimProducto"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows fetched per batch."
+                  expressionType="Notify"
+                  name="BatchSize">1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of rows inserted under the same transaction."
+                  expressionType="Notify"
+                  name="TransactionSize">1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines the chunk size allocation for LOB columns"
+                  expressionType="Notify"
+                  name="LobChunkSize">32768</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds to wait for an SQL statement to execute before returning to the application."
+                  expressionType="Notify"
+                  name="StatementTimeout">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The code page to use when code page information is unavailable from the data source."
+                  expressionType="Notify"
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Int32"
+                  description="The method used for inserting data. Possible values are 'Batch' or 'Row by row'."
+                  expressionType="Notify"
+                  name="InsertMethod">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The ODBC C data type for binding numeric data."
+                  expressionType="Notify"
+                  name="BindNumericAs">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines how the component would bind columns of (multi)-byte string types (i.e., SQL_CHAR, SQL_VARCHAR, SQL_LONGVARCHAR). The options are: Unicode (SQL_C_WCHAR) and ANSI (SQL_C_CHAR)."
+                  expressionType="Notify"
+                  name="BindCharColumnsAs">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Dimension Producto\Destino DimProducto.Connections[ODBCConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-NA60IVQ.DW_Albarran]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-NA60IVQ.DW_Albarran]"
+                  description="The ODBC runtime connection used to access the database."
+                  name="ODBCConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Dimension Producto\Destino DimProducto.Inputs[ODBC Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="ODBC Destination Input"
+                  truncationRowDisposition="FailComponent">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Dimension Producto\Destino DimProducto.Inputs[ODBC Destination Input].Columns[producto_id]"
+                      cachedDataType="i4"
+                      cachedName="producto_id"
+                      externalMetadataColumnId="Package\Dimension Producto\Destino DimProducto.Inputs[ODBC Destination Input].ExternalColumns[ProductoID_BK]"
+                      lineageId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output].Columns[producto_id]" />
+                    <inputColumn
+                      refId="Package\Dimension Producto\Destino DimProducto.Inputs[ODBC Destination Input].Columns[nombre]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="nombre"
+                      externalMetadataColumnId="Package\Dimension Producto\Destino DimProducto.Inputs[ODBC Destination Input].ExternalColumns[NombreProducto]"
+                      lineageId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output].Columns[nombre]" />
+                    <inputColumn
+                      refId="Package\Dimension Producto\Destino DimProducto.Inputs[ODBC Destination Input].Columns[categoria_id]"
+                      cachedDataType="i4"
+                      cachedName="categoria_id"
+                      externalMetadataColumnId="Package\Dimension Producto\Destino DimProducto.Inputs[ODBC Destination Input].ExternalColumns[Categoria]"
+                      lineageId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output].Columns[categoria_id]" />
+                    <inputColumn
+                      refId="Package\Dimension Producto\Destino DimProducto.Inputs[ODBC Destination Input].Columns[precio]"
+                      cachedDataType="i4"
+                      cachedName="precio"
+                      externalMetadataColumnId="Package\Dimension Producto\Destino DimProducto.Inputs[ODBC Destination Input].ExternalColumns[PrecioUnitarioReferencial]"
+                      lineageId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output].Columns[precio]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Dimension Producto\Destino DimProducto.Inputs[ODBC Destination Input].ExternalColumns[ProductoSK]"
+                      dataType="i4"
+                      name="ProductoSK" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Producto\Destino DimProducto.Inputs[ODBC Destination Input].ExternalColumns[ProductoID_BK]"
+                      dataType="i4"
+                      name="ProductoID_BK" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Producto\Destino DimProducto.Inputs[ODBC Destination Input].ExternalColumns[NombreProducto]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="NombreProducto" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Producto\Destino DimProducto.Inputs[ODBC Destination Input].ExternalColumns[Categoria]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Categoria" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Producto\Destino DimProducto.Inputs[ODBC Destination Input].ExternalColumns[PrecioUnitarioReferencial]"
+                      dataType="numeric"
+                      name="PrecioUnitarioReferencial"
+                      precision="12"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Dimension Producto\Destino DimProducto.Outputs[ODBC Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="ODBC Destination Error Output"
+                  synchronousInputId="Package\Dimension Producto\Destino DimProducto.Inputs[ODBC Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Producto\Destino DimProducto.Outputs[ODBC Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Producto\Destino DimProducto.Outputs[ODBC Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dimension Producto\Destino DimProducto.Outputs[ODBC Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Producto\Destino DimProducto.Outputs[ODBC Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Dimension Producto\Origen Producto"
+              componentClassID="Microsoft.SSISODBCSrc"
+              contactInfo="ODBC Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="ODBC Source"
+              name="Origen Producto"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The name of the table to be fetched."
+                  expressionType="Notify"
+                  name="TableName">"dbo"."productos"</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows fetched per batch."
+                  expressionType="Notify"
+                  name="BatchSize">1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines the chunk size allocation for LOB columns"
+                  expressionType="Notify"
+                  name="LobChunkSize">32768</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines how the component exposes CHAR columns. If False, CHAR columns are exposed as (multi-)byte strings (DT_STR), if True, CHAR columns are exposed as wide strings (DT_WSTR)"
+                  expressionType="Notify"
+                  name="ExposeCharColumnsAsUnicode">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds to wait for an SQL statement to execute before returning to the application."
+                  expressionType="Notify"
+                  name="StatementTimeout">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The code page to use when code page information is unavailable from the data source."
+                  expressionType="Notify"
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Int32"
+                  description="The method used for fetching data."
+                  expressionType="Notify"
+                  name="FetchMethod">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="The ODBC C data type for binding numeric data."
+                  expressionType="Notify"
+                  name="BindNumericAs">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines how the component would bind columns of (multi)-byte string types (i.e., SQL_CHAR, SQL_VARCHAR, SQL_LONGVARCHAR). The options are: Unicode (SQL_C_WCHAR) and ANSI (SQL_C_CHAR)."
+                  expressionType="Notify"
+                  name="BindCharColumnsAs">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The mode used to access the database."
+                  expressionType="Notify"
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Dimension Producto\Origen Producto.Connections[ODBCConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-NA60IVQ.Albarran]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-NA60IVQ.Albarran]"
+                  description="The ODBC runtime connection used to access the database."
+                  name="ODBCConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output]"
+                  errorRowDisposition="FailComponent"
+                  name="ODBC Source Output"
+                  truncationRowDisposition="FailComponent">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output].Columns[nombre]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output].ExternalColumns[nombre]"
+                      length="255"
+                      lineageId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output].Columns[nombre]"
+                      name="nombre" />
+                    <outputColumn
+                      refId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output].Columns[producto_id]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output].ExternalColumns[producto_id]"
+                      lineageId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output].Columns[producto_id]"
+                      name="producto_id" />
+                    <outputColumn
+                      refId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output].Columns[precio]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output].ExternalColumns[precio]"
+                      lineageId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output].Columns[precio]"
+                      name="precio" />
+                    <outputColumn
+                      refId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output].Columns[descripcion]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output].ExternalColumns[descripcion]"
+                      length="255"
+                      lineageId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output].Columns[descripcion]"
+                      name="descripcion" />
+                    <outputColumn
+                      refId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output].Columns[categoria_id]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output].ExternalColumns[categoria_id]"
+                      lineageId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output].Columns[categoria_id]"
+                      name="categoria_id" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output].ExternalColumns[nombre]"
+                      dataType="wstr"
+                      length="255"
+                      name="nombre" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output].ExternalColumns[producto_id]"
+                      dataType="i4"
+                      name="producto_id" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output].ExternalColumns[precio]"
+                      dataType="i4"
+                      name="precio" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output].ExternalColumns[descripcion]"
+                      dataType="wstr"
+                      length="255"
+                      name="descripcion" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output].ExternalColumns[categoria_id]"
+                      dataType="i4"
+                      name="categoria_id" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Error Output]"
+                  isErrorOut="true"
+                  name="ODBC Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Error Output].Columns[nombre]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output].ExternalColumns[nombre]"
+                      length="255"
+                      lineageId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Error Output].Columns[nombre]"
+                      name="nombre" />
+                    <outputColumn
+                      refId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Error Output].Columns[producto_id]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output].ExternalColumns[producto_id]"
+                      lineageId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Error Output].Columns[producto_id]"
+                      name="producto_id" />
+                    <outputColumn
+                      refId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Error Output].Columns[precio]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output].ExternalColumns[precio]"
+                      lineageId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Error Output].Columns[precio]"
+                      name="precio" />
+                    <outputColumn
+                      refId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Error Output].Columns[descripcion]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output].ExternalColumns[descripcion]"
+                      length="255"
+                      lineageId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Error Output].Columns[descripcion]"
+                      name="descripcion" />
+                    <outputColumn
+                      refId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Error Output].Columns[categoria_id]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output].ExternalColumns[categoria_id]"
+                      lineageId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Error Output].Columns[categoria_id]"
+                      name="categoria_id" />
+                    <outputColumn
+                      refId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Dimension Producto.Paths[ODBC Source Output]"
+              endId="Package\Dimension Producto\Destino DimProducto.Inputs[ODBC Destination Input]"
+              name="ODBC Source Output"
+              startId="Package\Dimension Producto\Origen Producto.Outputs[ODBC Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Dimension Tiempo"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{9bc8f8b2-e29b-47a9-8391-1e85c3d9f1f9}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Dimension Tiempo">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Dimension Tiempo\Destino DimTiempo"
+              componentClassID="Microsoft.SSISODBCDst"
+              contactInfo="ODBC Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="ODBC Destination"
+              name="Destino DimTiempo"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The name of the table to be fetched."
+                  expressionType="Notify"
+                  name="TableName">"dbo"."DimTiempo"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows fetched per batch."
+                  expressionType="Notify"
+                  name="BatchSize">1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of rows inserted under the same transaction."
+                  expressionType="Notify"
+                  name="TransactionSize">1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines the chunk size allocation for LOB columns"
+                  expressionType="Notify"
+                  name="LobChunkSize">32768</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds to wait for an SQL statement to execute before returning to the application."
+                  expressionType="Notify"
+                  name="StatementTimeout">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The code page to use when code page information is unavailable from the data source."
+                  expressionType="Notify"
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Int32"
+                  description="The method used for inserting data. Possible values are 'Batch' or 'Row by row'."
+                  expressionType="Notify"
+                  name="InsertMethod">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The ODBC C data type for binding numeric data."
+                  expressionType="Notify"
+                  name="BindNumericAs">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines how the component would bind columns of (multi)-byte string types (i.e., SQL_CHAR, SQL_VARCHAR, SQL_LONGVARCHAR). The options are: Unicode (SQL_C_WCHAR) and ANSI (SQL_C_CHAR)."
+                  expressionType="Notify"
+                  name="BindCharColumnsAs">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Dimension Tiempo\Destino DimTiempo.Connections[ODBCConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-NA60IVQ.DW_Albarran]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-NA60IVQ.DW_Albarran]"
+                  description="The ODBC runtime connection used to access the database."
+                  name="ODBCConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Dimension Tiempo\Destino DimTiempo.Inputs[ODBC Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="ODBC Destination Input"
+                  truncationRowDisposition="FailComponent">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Dimension Tiempo\Destino DimTiempo.Inputs[ODBC Destination Input].Columns[Dia]"
+                      cachedDataType="i4"
+                      cachedName="Dia"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Destino DimTiempo.Inputs[ODBC Destination Input].ExternalColumns[Dia]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].Columns[Dia]" />
+                    <inputColumn
+                      refId="Package\Dimension Tiempo\Destino DimTiempo.Inputs[ODBC Destination Input].Columns[Mes]"
+                      cachedDataType="i4"
+                      cachedName="Mes"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Destino DimTiempo.Inputs[ODBC Destination Input].ExternalColumns[Mes]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].Columns[Mes]" />
+                    <inputColumn
+                      refId="Package\Dimension Tiempo\Destino DimTiempo.Inputs[ODBC Destination Input].Columns[Fecha]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Fecha"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Destino DimTiempo.Inputs[ODBC Destination Input].ExternalColumns[Fecha]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].Columns[Fecha]" />
+                    <inputColumn
+                      refId="Package\Dimension Tiempo\Destino DimTiempo.Inputs[ODBC Destination Input].Columns[Trimestre]"
+                      cachedDataType="i4"
+                      cachedName="Trimestre"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Destino DimTiempo.Inputs[ODBC Destination Input].ExternalColumns[Trimestre]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].Columns[Trimestre]" />
+                    <inputColumn
+                      refId="Package\Dimension Tiempo\Destino DimTiempo.Inputs[ODBC Destination Input].Columns[NombreMes]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="NombreMes"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Destino DimTiempo.Inputs[ODBC Destination Input].ExternalColumns[NombreMes]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].Columns[NombreMes]" />
+                    <inputColumn
+                      refId="Package\Dimension Tiempo\Destino DimTiempo.Inputs[ODBC Destination Input].Columns[DiaSemana]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="DiaSemana"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Destino DimTiempo.Inputs[ODBC Destination Input].ExternalColumns[DiaSemana]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].Columns[DiaSemana]" />
+                    <inputColumn
+                      refId="Package\Dimension Tiempo\Destino DimTiempo.Inputs[ODBC Destination Input].Columns[TiempoSK]"
+                      cachedDataType="i4"
+                      cachedName="TiempoSK"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Destino DimTiempo.Inputs[ODBC Destination Input].ExternalColumns[TiempoSK]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].Columns[TiempoSK]" />
+                    <inputColumn
+                      refId="Package\Dimension Tiempo\Destino DimTiempo.Inputs[ODBC Destination Input].Columns[Anio]"
+                      cachedDataType="i4"
+                      cachedName="Anio"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Destino DimTiempo.Inputs[ODBC Destination Input].ExternalColumns[Anio]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].Columns[Anio]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Dimension Tiempo\Destino DimTiempo.Inputs[ODBC Destination Input].ExternalColumns[TiempoSK]"
+                      dataType="i4"
+                      name="TiempoSK" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Tiempo\Destino DimTiempo.Inputs[ODBC Destination Input].ExternalColumns[Fecha]"
+                      dataType="wstr"
+                      length="10"
+                      name="Fecha" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Tiempo\Destino DimTiempo.Inputs[ODBC Destination Input].ExternalColumns[Anio]"
+                      dataType="i4"
+                      name="Anio" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Tiempo\Destino DimTiempo.Inputs[ODBC Destination Input].ExternalColumns[Trimestre]"
+                      dataType="i4"
+                      name="Trimestre" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Tiempo\Destino DimTiempo.Inputs[ODBC Destination Input].ExternalColumns[Mes]"
+                      dataType="i4"
+                      name="Mes" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Tiempo\Destino DimTiempo.Inputs[ODBC Destination Input].ExternalColumns[NombreMes]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="NombreMes" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Tiempo\Destino DimTiempo.Inputs[ODBC Destination Input].ExternalColumns[Dia]"
+                      dataType="i4"
+                      name="Dia" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Tiempo\Destino DimTiempo.Inputs[ODBC Destination Input].ExternalColumns[DiaSemana]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="DiaSemana" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Dimension Tiempo\Destino DimTiempo.Outputs[ODBC Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="ODBC Destination Error Output"
+                  synchronousInputId="Package\Dimension Tiempo\Destino DimTiempo.Inputs[ODBC Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Tiempo\Destino DimTiempo.Outputs[ODBC Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Tiempo\Destino DimTiempo.Outputs[ODBC Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dimension Tiempo\Destino DimTiempo.Outputs[ODBC Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Tiempo\Destino DimTiempo.Outputs[ODBC Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Dimension Tiempo\Origen Tiempo"
+              componentClassID="Microsoft.SSISODBCSrc"
+              contactInfo="ODBC Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="ODBC Source"
+              name="Origen Tiempo"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The name of the table to be fetched."
+                  expressionType="Notify"
+                  name="TableName">"dbo"."clientes"</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT DISTINCT
+    CAST(CONVERT(VARCHAR(8), fecha, 112) AS INT) AS TiempoSK,
+    CAST(fecha AS DATE) AS Fecha,
+    YEAR(fecha) AS Anio,
+    DATEPART(QUARTER, fecha) AS Trimestre,
+    MONTH(fecha) AS Mes,
+    CAST(DATENAME(MONTH, fecha) AS VARCHAR(20)) AS NombreMes,
+    DAY(fecha) AS Dia,
+    CAST(DATENAME(WEEKDAY, fecha) AS VARCHAR(20)) AS DiaSemana
+FROM ventas;</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows fetched per batch."
+                  expressionType="Notify"
+                  name="BatchSize">1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines the chunk size allocation for LOB columns"
+                  expressionType="Notify"
+                  name="LobChunkSize">32768</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines how the component exposes CHAR columns. If False, CHAR columns are exposed as (multi-)byte strings (DT_STR), if True, CHAR columns are exposed as wide strings (DT_WSTR)"
+                  expressionType="Notify"
+                  name="ExposeCharColumnsAsUnicode">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds to wait for an SQL statement to execute before returning to the application."
+                  expressionType="Notify"
+                  name="StatementTimeout">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The code page to use when code page information is unavailable from the data source."
+                  expressionType="Notify"
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Int32"
+                  description="The method used for fetching data."
+                  expressionType="Notify"
+                  name="FetchMethod">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="The ODBC C data type for binding numeric data."
+                  expressionType="Notify"
+                  name="BindNumericAs">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines how the component would bind columns of (multi)-byte string types (i.e., SQL_CHAR, SQL_VARCHAR, SQL_LONGVARCHAR). The options are: Unicode (SQL_C_WCHAR) and ANSI (SQL_C_CHAR)."
+                  expressionType="Notify"
+                  name="BindCharColumnsAs">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The mode used to access the database."
+                  expressionType="Notify"
+                  name="AccessMode"
+                  typeConverter="AccessMode">1</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Dimension Tiempo\Origen Tiempo.Connections[ODBCConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-NA60IVQ.Albarran]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-NA60IVQ.Albarran]"
+                  description="The ODBC runtime connection used to access the database."
+                  name="ODBCConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output]"
+                  errorRowDisposition="FailComponent"
+                  name="ODBC Source Output"
+                  truncationRowDisposition="FailComponent">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].Columns[Fecha]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].ExternalColumns[Fecha]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].Columns[Fecha]"
+                      name="Fecha" />
+                    <outputColumn
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].Columns[Trimestre]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].ExternalColumns[Trimestre]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].Columns[Trimestre]"
+                      name="Trimestre" />
+                    <outputColumn
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].Columns[Mes]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].ExternalColumns[Mes]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].Columns[Mes]"
+                      name="Mes" />
+                    <outputColumn
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].Columns[NombreMes]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].ExternalColumns[NombreMes]"
+                      length="20"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].Columns[NombreMes]"
+                      name="NombreMes" />
+                    <outputColumn
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].Columns[Dia]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].ExternalColumns[Dia]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].Columns[Dia]"
+                      name="Dia" />
+                    <outputColumn
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].Columns[DiaSemana]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].ExternalColumns[DiaSemana]"
+                      length="20"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].Columns[DiaSemana]"
+                      name="DiaSemana" />
+                    <outputColumn
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].Columns[TiempoSK]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].ExternalColumns[TiempoSK]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].Columns[TiempoSK]"
+                      name="TiempoSK" />
+                    <outputColumn
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].Columns[Anio]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].ExternalColumns[Anio]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].Columns[Anio]"
+                      name="Anio" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].ExternalColumns[Fecha]"
+                      dataType="wstr"
+                      length="10"
+                      name="Fecha" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].ExternalColumns[Trimestre]"
+                      dataType="i4"
+                      name="Trimestre" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].ExternalColumns[Mes]"
+                      dataType="i4"
+                      name="Mes" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].ExternalColumns[NombreMes]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="NombreMes" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].ExternalColumns[Dia]"
+                      dataType="i4"
+                      name="Dia" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].ExternalColumns[DiaSemana]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="DiaSemana" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].ExternalColumns[TiempoSK]"
+                      dataType="i4"
+                      name="TiempoSK" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].ExternalColumns[Anio]"
+                      dataType="i4"
+                      name="Anio" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Error Output]"
+                  isErrorOut="true"
+                  name="ODBC Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Error Output].Columns[Fecha]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].ExternalColumns[Fecha]"
+                      length="10"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Error Output].Columns[Fecha]"
+                      name="Fecha" />
+                    <outputColumn
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Error Output].Columns[Trimestre]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].ExternalColumns[Trimestre]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Error Output].Columns[Trimestre]"
+                      name="Trimestre" />
+                    <outputColumn
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Error Output].Columns[Mes]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].ExternalColumns[Mes]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Error Output].Columns[Mes]"
+                      name="Mes" />
+                    <outputColumn
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Error Output].Columns[NombreMes]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].ExternalColumns[NombreMes]"
+                      length="20"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Error Output].Columns[NombreMes]"
+                      name="NombreMes" />
+                    <outputColumn
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Error Output].Columns[Dia]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].ExternalColumns[Dia]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Error Output].Columns[Dia]"
+                      name="Dia" />
+                    <outputColumn
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Error Output].Columns[DiaSemana]"
+                      codePage="1252"
+                      dataType="str"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].ExternalColumns[DiaSemana]"
+                      length="20"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Error Output].Columns[DiaSemana]"
+                      name="DiaSemana" />
+                    <outputColumn
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Error Output].Columns[TiempoSK]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].ExternalColumns[TiempoSK]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Error Output].Columns[TiempoSK]"
+                      name="TiempoSK" />
+                    <outputColumn
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Error Output].Columns[Anio]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output].ExternalColumns[Anio]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Error Output].Columns[Anio]"
+                      name="Anio" />
+                    <outputColumn
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Dimension Tiempo.Paths[ODBC Source Output]"
+              endId="Package\Dimension Tiempo\Destino DimTiempo.Inputs[ODBC Destination Input]"
+              name="ODBC Source Output"
+              startId="Package\Dimension Tiempo\Origen Tiempo.Outputs[ODBC Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Dimension Ubicacion"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{6fb4b00f-81bf-4bcb-8287-61a0749bd8fc}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Dimension Ubicacion">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Dimension Ubicacion\Destino DimUbicacion"
+              componentClassID="Microsoft.SSISODBCDst"
+              contactInfo="ODBC Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="ODBC Destination"
+              name="Destino DimUbicacion"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The name of the table to be fetched."
+                  expressionType="Notify"
+                  name="TableName">"dbo"."DimSucursal"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows fetched per batch."
+                  expressionType="Notify"
+                  name="BatchSize">1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of rows inserted under the same transaction."
+                  expressionType="Notify"
+                  name="TransactionSize">1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines the chunk size allocation for LOB columns"
+                  expressionType="Notify"
+                  name="LobChunkSize">32768</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds to wait for an SQL statement to execute before returning to the application."
+                  expressionType="Notify"
+                  name="StatementTimeout">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The code page to use when code page information is unavailable from the data source."
+                  expressionType="Notify"
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Int32"
+                  description="The method used for inserting data. Possible values are 'Batch' or 'Row by row'."
+                  expressionType="Notify"
+                  name="InsertMethod">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The ODBC C data type for binding numeric data."
+                  expressionType="Notify"
+                  name="BindNumericAs">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines how the component would bind columns of (multi)-byte string types (i.e., SQL_CHAR, SQL_VARCHAR, SQL_LONGVARCHAR). The options are: Unicode (SQL_C_WCHAR) and ANSI (SQL_C_CHAR)."
+                  expressionType="Notify"
+                  name="BindCharColumnsAs">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Dimension Ubicacion\Destino DimUbicacion.Connections[ODBCConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-NA60IVQ.DW_Albarran]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-NA60IVQ.DW_Albarran]"
+                  description="The ODBC runtime connection used to access the database."
+                  name="ODBCConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Dimension Ubicacion\Destino DimUbicacion.Inputs[ODBC Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="ODBC Destination Input"
+                  truncationRowDisposition="FailComponent">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Dimension Ubicacion\Destino DimUbicacion.Inputs[ODBC Destination Input].Columns[comuna]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="comuna"
+                      externalMetadataColumnId="Package\Dimension Ubicacion\Destino DimUbicacion.Inputs[ODBC Destination Input].ExternalColumns[Comuna]"
+                      lineageId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Output].Columns[comuna]" />
+                    <inputColumn
+                      refId="Package\Dimension Ubicacion\Destino DimUbicacion.Inputs[ODBC Destination Input].Columns[ID_UBICACION]"
+                      cachedDataType="i4"
+                      cachedName="ID_UBICACION"
+                      externalMetadataColumnId="Package\Dimension Ubicacion\Destino DimUbicacion.Inputs[ODBC Destination Input].ExternalColumns[SucursalID_BK]"
+                      lineageId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Output].Columns[ID_UBICACION]" />
+                    <inputColumn
+                      refId="Package\Dimension Ubicacion\Destino DimUbicacion.Inputs[ODBC Destination Input].Columns[sucursal]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="sucursal"
+                      externalMetadataColumnId="Package\Dimension Ubicacion\Destino DimUbicacion.Inputs[ODBC Destination Input].ExternalColumns[NombreSucursal]"
+                      lineageId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Output].Columns[sucursal]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Dimension Ubicacion\Destino DimUbicacion.Inputs[ODBC Destination Input].ExternalColumns[SucursalSK]"
+                      dataType="i4"
+                      name="SucursalSK" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Ubicacion\Destino DimUbicacion.Inputs[ODBC Destination Input].ExternalColumns[SucursalID_BK]"
+                      dataType="i4"
+                      name="SucursalID_BK" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Ubicacion\Destino DimUbicacion.Inputs[ODBC Destination Input].ExternalColumns[NombreSucursal]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="NombreSucursal" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Ubicacion\Destino DimUbicacion.Inputs[ODBC Destination Input].ExternalColumns[Comuna]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Comuna" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Dimension Ubicacion\Destino DimUbicacion.Outputs[ODBC Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="ODBC Destination Error Output"
+                  synchronousInputId="Package\Dimension Ubicacion\Destino DimUbicacion.Inputs[ODBC Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Ubicacion\Destino DimUbicacion.Outputs[ODBC Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Ubicacion\Destino DimUbicacion.Outputs[ODBC Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dimension Ubicacion\Destino DimUbicacion.Outputs[ODBC Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Ubicacion\Destino DimUbicacion.Outputs[ODBC Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Dimension Ubicacion\Origen Ubicacion"
+              componentClassID="Microsoft.SSISODBCSrc"
+              contactInfo="ODBC Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="ODBC Source"
+              name="Origen Ubicacion"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The name of the table to be fetched."
+                  expressionType="Notify"
+                  name="TableName">"dbo"."clientes"</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT s.sucursal_id AS ID_UBICACION, s.sucursal, c.comuna
+FROM sucursales s INNER JOIN comunas c ON s.comuna_id = c.comuna_id</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows fetched per batch."
+                  expressionType="Notify"
+                  name="BatchSize">1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines the chunk size allocation for LOB columns"
+                  expressionType="Notify"
+                  name="LobChunkSize">32768</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines how the component exposes CHAR columns. If False, CHAR columns are exposed as (multi-)byte strings (DT_STR), if True, CHAR columns are exposed as wide strings (DT_WSTR)"
+                  expressionType="Notify"
+                  name="ExposeCharColumnsAsUnicode">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds to wait for an SQL statement to execute before returning to the application."
+                  expressionType="Notify"
+                  name="StatementTimeout">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The code page to use when code page information is unavailable from the data source."
+                  expressionType="Notify"
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Int32"
+                  description="The method used for fetching data."
+                  expressionType="Notify"
+                  name="FetchMethod">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="The ODBC C data type for binding numeric data."
+                  expressionType="Notify"
+                  name="BindNumericAs">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines how the component would bind columns of (multi)-byte string types (i.e., SQL_CHAR, SQL_VARCHAR, SQL_LONGVARCHAR). The options are: Unicode (SQL_C_WCHAR) and ANSI (SQL_C_CHAR)."
+                  expressionType="Notify"
+                  name="BindCharColumnsAs">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The mode used to access the database."
+                  expressionType="Notify"
+                  name="AccessMode"
+                  typeConverter="AccessMode">1</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Dimension Ubicacion\Origen Ubicacion.Connections[ODBCConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-NA60IVQ.Albarran]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-NA60IVQ.Albarran]"
+                  description="The ODBC runtime connection used to access the database."
+                  name="ODBCConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Output]"
+                  errorRowDisposition="FailComponent"
+                  name="ODBC Source Output"
+                  truncationRowDisposition="FailComponent">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Output].Columns[ID_UBICACION]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Output].ExternalColumns[ID_UBICACION]"
+                      lineageId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Output].Columns[ID_UBICACION]"
+                      name="ID_UBICACION" />
+                    <outputColumn
+                      refId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Output].Columns[sucursal]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Output].ExternalColumns[sucursal]"
+                      length="255"
+                      lineageId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Output].Columns[sucursal]"
+                      name="sucursal" />
+                    <outputColumn
+                      refId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Output].Columns[comuna]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Output].ExternalColumns[comuna]"
+                      length="255"
+                      lineageId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Output].Columns[comuna]"
+                      name="comuna" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Output].ExternalColumns[ID_UBICACION]"
+                      dataType="i4"
+                      name="ID_UBICACION" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Output].ExternalColumns[sucursal]"
+                      dataType="wstr"
+                      length="255"
+                      name="sucursal" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Output].ExternalColumns[comuna]"
+                      dataType="wstr"
+                      length="255"
+                      name="comuna" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Error Output]"
+                  isErrorOut="true"
+                  name="ODBC Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Error Output].Columns[ID_UBICACION]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Output].ExternalColumns[ID_UBICACION]"
+                      lineageId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Error Output].Columns[ID_UBICACION]"
+                      name="ID_UBICACION" />
+                    <outputColumn
+                      refId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Error Output].Columns[sucursal]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Output].ExternalColumns[sucursal]"
+                      length="255"
+                      lineageId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Error Output].Columns[sucursal]"
+                      name="sucursal" />
+                    <outputColumn
+                      refId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Error Output].Columns[comuna]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Output].ExternalColumns[comuna]"
+                      length="255"
+                      lineageId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Error Output].Columns[comuna]"
+                      name="comuna" />
+                    <outputColumn
+                      refId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Dimension Ubicacion.Paths[ODBC Source Output]"
+              endId="Package\Dimension Ubicacion\Destino DimUbicacion.Inputs[ODBC Destination Input]"
+              name="ODBC Source Output"
+              startId="Package\Dimension Ubicacion\Origen Ubicacion.Outputs[ODBC Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Dimension Vendedores"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{81ffe2f8-89be-40d2-bfd1-2afa34de398b}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Dimension Vendedores">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Dimension Vendedores\Destino Vendedores"
+              componentClassID="Microsoft.SSISODBCDst"
+              contactInfo="ODBC Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="ODBC Destination"
+              name="Destino Vendedores"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The name of the table to be fetched."
+                  expressionType="Notify"
+                  name="TableName">"dbo"."DimEmpleado"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows fetched per batch."
+                  expressionType="Notify"
+                  name="BatchSize">1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of rows inserted under the same transaction."
+                  expressionType="Notify"
+                  name="TransactionSize">1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines the chunk size allocation for LOB columns"
+                  expressionType="Notify"
+                  name="LobChunkSize">32768</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds to wait for an SQL statement to execute before returning to the application."
+                  expressionType="Notify"
+                  name="StatementTimeout">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The code page to use when code page information is unavailable from the data source."
+                  expressionType="Notify"
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Int32"
+                  description="The method used for inserting data. Possible values are 'Batch' or 'Row by row'."
+                  expressionType="Notify"
+                  name="InsertMethod">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The ODBC C data type for binding numeric data."
+                  expressionType="Notify"
+                  name="BindNumericAs">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines how the component would bind columns of (multi)-byte string types (i.e., SQL_CHAR, SQL_VARCHAR, SQL_LONGVARCHAR). The options are: Unicode (SQL_C_WCHAR) and ANSI (SQL_C_CHAR)."
+                  expressionType="Notify"
+                  name="BindCharColumnsAs">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Dimension Vendedores\Destino Vendedores.Connections[ODBCConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-NA60IVQ.DW_Albarran]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-NA60IVQ.DW_Albarran]"
+                  description="The ODBC runtime connection used to access the database."
+                  name="ODBCConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Dimension Vendedores\Destino Vendedores.Inputs[ODBC Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="ODBC Destination Input"
+                  truncationRowDisposition="FailComponent">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Dimension Vendedores\Destino Vendedores.Inputs[ODBC Destination Input].Columns[nombre]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="nombre"
+                      externalMetadataColumnId="Package\Dimension Vendedores\Destino Vendedores.Inputs[ODBC Destination Input].ExternalColumns[NombreCompleto]"
+                      lineageId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].Columns[nombre]" />
+                    <inputColumn
+                      refId="Package\Dimension Vendedores\Destino Vendedores.Inputs[ODBC Destination Input].Columns[empleado_id]"
+                      cachedDataType="i4"
+                      cachedName="empleado_id"
+                      externalMetadataColumnId="Package\Dimension Vendedores\Destino Vendedores.Inputs[ODBC Destination Input].ExternalColumns[EmpleadoID_BK]"
+                      lineageId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].Columns[empleado_id]" />
+                    <inputColumn
+                      refId="Package\Dimension Vendedores\Destino Vendedores.Inputs[ODBC Destination Input].Columns[cargo_id]"
+                      cachedDataType="i4"
+                      cachedName="cargo_id"
+                      externalMetadataColumnId="Package\Dimension Vendedores\Destino Vendedores.Inputs[ODBC Destination Input].ExternalColumns[Cargo]"
+                      lineageId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].Columns[cargo_id]" />
+                    <inputColumn
+                      refId="Package\Dimension Vendedores\Destino Vendedores.Inputs[ODBC Destination Input].Columns[fecha_contrato]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="fecha_contrato"
+                      externalMetadataColumnId="Package\Dimension Vendedores\Destino Vendedores.Inputs[ODBC Destination Input].ExternalColumns[FechaContrato]"
+                      lineageId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].Columns[fecha_contrato]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Dimension Vendedores\Destino Vendedores.Inputs[ODBC Destination Input].ExternalColumns[NombreCompleto]"
+                      codePage="1252"
+                      dataType="str"
+                      length="150"
+                      name="NombreCompleto" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Vendedores\Destino Vendedores.Inputs[ODBC Destination Input].ExternalColumns[EmpleadoSK]"
+                      dataType="i4"
+                      name="EmpleadoSK" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Vendedores\Destino Vendedores.Inputs[ODBC Destination Input].ExternalColumns[EmpleadoID_BK]"
+                      dataType="i4"
+                      name="EmpleadoID_BK" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Vendedores\Destino Vendedores.Inputs[ODBC Destination Input].ExternalColumns[Cargo]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Cargo" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Vendedores\Destino Vendedores.Inputs[ODBC Destination Input].ExternalColumns[FechaContrato]"
+                      dataType="wstr"
+                      length="10"
+                      name="FechaContrato" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Dimension Vendedores\Destino Vendedores.Outputs[ODBC Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="ODBC Destination Error Output"
+                  synchronousInputId="Package\Dimension Vendedores\Destino Vendedores.Inputs[ODBC Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Vendedores\Destino Vendedores.Outputs[ODBC Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Vendedores\Destino Vendedores.Outputs[ODBC Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dimension Vendedores\Destino Vendedores.Outputs[ODBC Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Vendedores\Destino Vendedores.Outputs[ODBC Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Dimension Vendedores\Origen Vendedores"
+              componentClassID="Microsoft.SSISODBCSrc"
+              contactInfo="ODBC Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="ODBC Source"
+              name="Origen Vendedores"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The name of the table to be fetched."
+                  expressionType="Notify"
+                  name="TableName">"dbo"."empleados"</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows fetched per batch."
+                  expressionType="Notify"
+                  name="BatchSize">1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines the chunk size allocation for LOB columns"
+                  expressionType="Notify"
+                  name="LobChunkSize">32768</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines how the component exposes CHAR columns. If False, CHAR columns are exposed as (multi-)byte strings (DT_STR), if True, CHAR columns are exposed as wide strings (DT_WSTR)"
+                  expressionType="Notify"
+                  name="ExposeCharColumnsAsUnicode">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds to wait for an SQL statement to execute before returning to the application."
+                  expressionType="Notify"
+                  name="StatementTimeout">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The code page to use when code page information is unavailable from the data source."
+                  expressionType="Notify"
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Int32"
+                  description="The method used for fetching data."
+                  expressionType="Notify"
+                  name="FetchMethod">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="The ODBC C data type for binding numeric data."
+                  expressionType="Notify"
+                  name="BindNumericAs">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines how the component would bind columns of (multi)-byte string types (i.e., SQL_CHAR, SQL_VARCHAR, SQL_LONGVARCHAR). The options are: Unicode (SQL_C_WCHAR) and ANSI (SQL_C_CHAR)."
+                  expressionType="Notify"
+                  name="BindCharColumnsAs">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The mode used to access the database."
+                  expressionType="Notify"
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Dimension Vendedores\Origen Vendedores.Connections[ODBCConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-NA60IVQ.Albarran]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-NA60IVQ.Albarran]"
+                  description="The ODBC runtime connection used to access the database."
+                  name="ODBCConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output]"
+                  errorRowDisposition="FailComponent"
+                  name="ODBC Source Output"
+                  truncationRowDisposition="FailComponent">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].Columns[nombre]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].ExternalColumns[nombre]"
+                      length="255"
+                      lineageId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].Columns[nombre]"
+                      name="nombre" />
+                    <outputColumn
+                      refId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].Columns[appaterno]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].ExternalColumns[appaterno]"
+                      length="255"
+                      lineageId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].Columns[appaterno]"
+                      name="appaterno" />
+                    <outputColumn
+                      refId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].Columns[apmaterno]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].ExternalColumns[apmaterno]"
+                      length="255"
+                      lineageId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].Columns[apmaterno]"
+                      name="apmaterno" />
+                    <outputColumn
+                      refId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].Columns[empleado_id]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].ExternalColumns[empleado_id]"
+                      lineageId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].Columns[empleado_id]"
+                      name="empleado_id" />
+                    <outputColumn
+                      refId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].Columns[fecha_contrato]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].ExternalColumns[fecha_contrato]"
+                      lineageId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].Columns[fecha_contrato]"
+                      name="fecha_contrato" />
+                    <outputColumn
+                      refId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].Columns[sueldo_base]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].ExternalColumns[sueldo_base]"
+                      lineageId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].Columns[sueldo_base]"
+                      name="sueldo_base" />
+                    <outputColumn
+                      refId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].Columns[cargo_id]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].ExternalColumns[cargo_id]"
+                      lineageId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].Columns[cargo_id]"
+                      name="cargo_id" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].ExternalColumns[nombre]"
+                      dataType="wstr"
+                      length="255"
+                      name="nombre" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].ExternalColumns[appaterno]"
+                      dataType="wstr"
+                      length="255"
+                      name="appaterno" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].ExternalColumns[apmaterno]"
+                      dataType="wstr"
+                      length="255"
+                      name="apmaterno" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].ExternalColumns[empleado_id]"
+                      dataType="i4"
+                      name="empleado_id" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].ExternalColumns[fecha_contrato]"
+                      dataType="dbTimeStamp"
+                      name="fecha_contrato" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].ExternalColumns[sueldo_base]"
+                      dataType="i4"
+                      name="sueldo_base" />
+                    <externalMetadataColumn
+                      refId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].ExternalColumns[cargo_id]"
+                      dataType="i4"
+                      name="cargo_id" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Error Output]"
+                  isErrorOut="true"
+                  name="ODBC Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Error Output].Columns[nombre]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].ExternalColumns[nombre]"
+                      length="255"
+                      lineageId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Error Output].Columns[nombre]"
+                      name="nombre" />
+                    <outputColumn
+                      refId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Error Output].Columns[appaterno]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].ExternalColumns[appaterno]"
+                      length="255"
+                      lineageId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Error Output].Columns[appaterno]"
+                      name="appaterno" />
+                    <outputColumn
+                      refId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Error Output].Columns[apmaterno]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].ExternalColumns[apmaterno]"
+                      length="255"
+                      lineageId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Error Output].Columns[apmaterno]"
+                      name="apmaterno" />
+                    <outputColumn
+                      refId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Error Output].Columns[empleado_id]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].ExternalColumns[empleado_id]"
+                      lineageId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Error Output].Columns[empleado_id]"
+                      name="empleado_id" />
+                    <outputColumn
+                      refId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Error Output].Columns[fecha_contrato]"
+                      dataType="dbTimeStamp"
+                      externalMetadataColumnId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].ExternalColumns[fecha_contrato]"
+                      lineageId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Error Output].Columns[fecha_contrato]"
+                      name="fecha_contrato" />
+                    <outputColumn
+                      refId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Error Output].Columns[sueldo_base]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].ExternalColumns[sueldo_base]"
+                      lineageId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Error Output].Columns[sueldo_base]"
+                      name="sueldo_base" />
+                    <outputColumn
+                      refId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Error Output].Columns[cargo_id]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output].ExternalColumns[cargo_id]"
+                      lineageId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Error Output].Columns[cargo_id]"
+                      name="cargo_id" />
+                    <outputColumn
+                      refId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Dimension Vendedores.Paths[ODBC Source Output]"
+              endId="Package\Dimension Vendedores\Destino Vendedores.Inputs[ODBC Destination Input]"
+              name="ODBC Source Output"
+              startId="Package\Dimension Vendedores\Origen Vendedores.Outputs[ODBC Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Eliminar Datos"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{972D31EB-867D-4BAB-ADE2-8D029FEF8956}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Eliminar Datos"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022 CTP2.0; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{FEC84B16-CCD1-4E15-ADD2-FE9C25302EF2}"
+          SQLTask:SqlStatementSource="DELETE FROM FactVentas;&#xA;DELETE FROM DimProducto;&#xA;DELETE FROM DimCliente;&#xA;DELETE FROM DimEmpleado;&#xA;DELETE FROM DimSucursal;&#xA;DELETE FROM DimTiempo;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Hechos Ventas"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{9b20249f-558c-4060-8131-20bfa667fe47}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Hechos Ventas">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Hechos Ventas\Destino HechoVenta"
+              componentClassID="Microsoft.SSISODBCDst"
+              contactInfo="ODBC Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="ODBC Destination"
+              name="Destino HechoVenta"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The name of the table to be fetched."
+                  expressionType="Notify"
+                  name="TableName">"dbo"."FactVentas"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows fetched per batch."
+                  expressionType="Notify"
+                  name="BatchSize">1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of rows inserted under the same transaction."
+                  expressionType="Notify"
+                  name="TransactionSize">1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines the chunk size allocation for LOB columns"
+                  expressionType="Notify"
+                  name="LobChunkSize">32768</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds to wait for an SQL statement to execute before returning to the application."
+                  expressionType="Notify"
+                  name="StatementTimeout">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The code page to use when code page information is unavailable from the data source."
+                  expressionType="Notify"
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Int32"
+                  description="The method used for inserting data. Possible values are 'Batch' or 'Row by row'."
+                  expressionType="Notify"
+                  name="InsertMethod">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The ODBC C data type for binding numeric data."
+                  expressionType="Notify"
+                  name="BindNumericAs">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines how the component would bind columns of (multi)-byte string types (i.e., SQL_CHAR, SQL_VARCHAR, SQL_LONGVARCHAR). The options are: Unicode (SQL_C_WCHAR) and ANSI (SQL_C_CHAR)."
+                  expressionType="Notify"
+                  name="BindCharColumnsAs">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Hechos Ventas\Destino HechoVenta.Connections[ODBCConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-NA60IVQ.DW_Albarran]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-NA60IVQ.DW_Albarran]"
+                  description="The ODBC runtime connection used to access the database."
+                  name="ODBCConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="ODBC Destination Input"
+                  truncationRowDisposition="FailComponent">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].Columns[Cantidad]"
+                      cachedDataType="i4"
+                      cachedName="Cantidad"
+                      externalMetadataColumnId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].ExternalColumns[Cantidad]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[Cantidad]" />
+                    <inputColumn
+                      refId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].Columns[Descuento]"
+                      cachedDataType="numeric"
+                      cachedName="Descuento"
+                      cachedPrecision="5"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].ExternalColumns[Descuento]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[Descuento]" />
+                    <inputColumn
+                      refId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].Columns[ClienteSK]"
+                      cachedDataType="i4"
+                      cachedName="ClienteSK"
+                      externalMetadataColumnId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].ExternalColumns[ClienteSK]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[ClienteSK]" />
+                    <inputColumn
+                      refId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].Columns[VentaID_BK]"
+                      cachedDataType="i4"
+                      cachedName="VentaID_BK"
+                      externalMetadataColumnId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].ExternalColumns[VentaID_BK]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[VentaID_BK]" />
+                    <inputColumn
+                      refId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].Columns[ProductoSK]"
+                      cachedDataType="i4"
+                      cachedName="ProductoSK"
+                      externalMetadataColumnId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].ExternalColumns[ProductoSK]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[ProductoSK]" />
+                    <inputColumn
+                      refId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].Columns[EmpleadoSK]"
+                      cachedDataType="i4"
+                      cachedName="EmpleadoSK"
+                      externalMetadataColumnId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].ExternalColumns[EmpleadoSK]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[EmpleadoSK]" />
+                    <inputColumn
+                      refId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].Columns[SucursalSK]"
+                      cachedDataType="i4"
+                      cachedName="SucursalSK"
+                      externalMetadataColumnId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].ExternalColumns[SucursalSK]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[SucursalSK]" />
+                    <inputColumn
+                      refId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].Columns[TiempoSK]"
+                      cachedDataType="i4"
+                      cachedName="TiempoSK"
+                      externalMetadataColumnId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].ExternalColumns[TiempoSK]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[TiempoSK]" />
+                    <inputColumn
+                      refId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].Columns[MontoTotal]"
+                      cachedDataType="i4"
+                      cachedName="MontoTotal"
+                      externalMetadataColumnId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].ExternalColumns[MontoTotal]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[MontoTotal]" />
+                    <inputColumn
+                      refId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].Columns[PrecioUnitario]"
+                      cachedDataType="i4"
+                      cachedName="PrecioUnitario"
+                      externalMetadataColumnId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].ExternalColumns[PrecioUnitario]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[PrecioUnitario]" />
+                    <inputColumn
+                      refId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].Columns[TipoDocumento]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="TipoDocumento"
+                      externalMetadataColumnId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].ExternalColumns[TipoDocumento]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[TipoDocumento]" />
+                    <inputColumn
+                      refId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].Columns[NumeroDocumento]"
+                      cachedDataType="i4"
+                      cachedName="NumeroDocumento"
+                      externalMetadataColumnId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].ExternalColumns[NumeroDocumento]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[NumeroDocumento]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].ExternalColumns[ClienteSK]"
+                      dataType="i4"
+                      name="ClienteSK" />
+                    <externalMetadataColumn
+                      refId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].ExternalColumns[VentaID_BK]"
+                      dataType="i4"
+                      name="VentaID_BK" />
+                    <externalMetadataColumn
+                      refId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].ExternalColumns[ProductoSK]"
+                      dataType="i4"
+                      name="ProductoSK" />
+                    <externalMetadataColumn
+                      refId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].ExternalColumns[EmpleadoSK]"
+                      dataType="i4"
+                      name="EmpleadoSK" />
+                    <externalMetadataColumn
+                      refId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].ExternalColumns[SucursalSK]"
+                      dataType="i4"
+                      name="SucursalSK" />
+                    <externalMetadataColumn
+                      refId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].ExternalColumns[TiempoSK]"
+                      dataType="i4"
+                      name="TiempoSK" />
+                    <externalMetadataColumn
+                      refId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].ExternalColumns[NumeroDocumento]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="NumeroDocumento" />
+                    <externalMetadataColumn
+                      refId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].ExternalColumns[TipoDocumento]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="TipoDocumento" />
+                    <externalMetadataColumn
+                      refId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].ExternalColumns[Cantidad]"
+                      dataType="i4"
+                      name="Cantidad" />
+                    <externalMetadataColumn
+                      refId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].ExternalColumns[PrecioUnitario]"
+                      dataType="numeric"
+                      name="PrecioUnitario"
+                      precision="12"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].ExternalColumns[Descuento]"
+                      dataType="numeric"
+                      name="Descuento"
+                      precision="12"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input].ExternalColumns[MontoTotal]"
+                      dataType="numeric"
+                      name="MontoTotal"
+                      precision="12"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Hechos Ventas\Destino HechoVenta.Outputs[ODBC Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="ODBC Destination Error Output"
+                  synchronousInputId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Hechos Ventas\Destino HechoVenta.Outputs[ODBC Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Hechos Ventas\Destino HechoVenta.Outputs[ODBC Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Hechos Ventas\Destino HechoVenta.Outputs[ODBC Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Hechos Ventas\Destino HechoVenta.Outputs[ODBC Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Hechos Ventas\Origen HechoVenta"
+              componentClassID="Microsoft.SSISODBCSrc"
+              contactInfo="ODBC Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="ODBC Source"
+              name="Origen HechoVenta"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The name of the table to be fetched."
+                  expressionType="Notify"
+                  name="TableName">"dbo"."clientes"</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT 
+    v.venta_id AS VentaID_BK,
+    dv.producto_id AS ProductoSK,
+    v.cliente_id AS ClienteSK,
+    v.vendedor_id AS EmpleadoSK,
+    v.sucursal_id AS SucursalSK,
+    CAST(CONVERT(VARCHAR(8), v.fecha, 112) AS INT) AS TiempoSK, -- Convierte la fecha a INT
+    v.numero_documento AS NumeroDocumento,
+    v.tipo_documento AS TipoDocumento,
+    dv.cantidad AS Cantidad,
+    dv.precio_unitario AS PrecioUnitario,
+    dv.descuento AS Descuento,
+    (dv.cantidad * dv.precio_unitario) AS MontoTotal
+FROM ventas v 
+INNER JOIN detalle_ventas dv ON v.venta_id = dv.venta_id;</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows fetched per batch."
+                  expressionType="Notify"
+                  name="BatchSize">1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines the chunk size allocation for LOB columns"
+                  expressionType="Notify"
+                  name="LobChunkSize">32768</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines how the component exposes CHAR columns. If False, CHAR columns are exposed as (multi-)byte strings (DT_STR), if True, CHAR columns are exposed as wide strings (DT_WSTR)"
+                  expressionType="Notify"
+                  name="ExposeCharColumnsAsUnicode">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds to wait for an SQL statement to execute before returning to the application."
+                  expressionType="Notify"
+                  name="StatementTimeout">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The code page to use when code page information is unavailable from the data source."
+                  expressionType="Notify"
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Int32"
+                  description="The method used for fetching data."
+                  expressionType="Notify"
+                  name="FetchMethod">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="The ODBC C data type for binding numeric data."
+                  expressionType="Notify"
+                  name="BindNumericAs">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines how the component would bind columns of (multi)-byte string types (i.e., SQL_CHAR, SQL_VARCHAR, SQL_LONGVARCHAR). The options are: Unicode (SQL_C_WCHAR) and ANSI (SQL_C_CHAR)."
+                  expressionType="Notify"
+                  name="BindCharColumnsAs">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The mode used to access the database."
+                  expressionType="Notify"
+                  name="AccessMode"
+                  typeConverter="AccessMode">1</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Hechos Ventas\Origen HechoVenta.Connections[ODBCConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-NA60IVQ.Albarran]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-NA60IVQ.Albarran]"
+                  description="The ODBC runtime connection used to access the database."
+                  name="ODBCConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output]"
+                  errorRowDisposition="FailComponent"
+                  name="ODBC Source Output"
+                  truncationRowDisposition="FailComponent">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[VentaID_BK]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[VentaID_BK]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[VentaID_BK]"
+                      name="VentaID_BK" />
+                    <outputColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[ProductoSK]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[ProductoSK]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[ProductoSK]"
+                      name="ProductoSK" />
+                    <outputColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[ClienteSK]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[ClienteSK]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[ClienteSK]"
+                      name="ClienteSK" />
+                    <outputColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[EmpleadoSK]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[EmpleadoSK]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[EmpleadoSK]"
+                      name="EmpleadoSK" />
+                    <outputColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[SucursalSK]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[SucursalSK]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[SucursalSK]"
+                      name="SucursalSK" />
+                    <outputColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[TiempoSK]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[TiempoSK]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[TiempoSK]"
+                      name="TiempoSK" />
+                    <outputColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[NumeroDocumento]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[NumeroDocumento]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[NumeroDocumento]"
+                      name="NumeroDocumento" />
+                    <outputColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[TipoDocumento]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[TipoDocumento]"
+                      length="255"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[TipoDocumento]"
+                      name="TipoDocumento" />
+                    <outputColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[Cantidad]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[Cantidad]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[Cantidad]"
+                      name="Cantidad" />
+                    <outputColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[PrecioUnitario]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[PrecioUnitario]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[PrecioUnitario]"
+                      name="PrecioUnitario" />
+                    <outputColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[Descuento]"
+                      dataType="numeric"
+                      externalMetadataColumnId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[Descuento]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[Descuento]"
+                      name="Descuento"
+                      precision="5"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[MontoTotal]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[MontoTotal]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].Columns[MontoTotal]"
+                      name="MontoTotal" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[VentaID_BK]"
+                      dataType="i4"
+                      name="VentaID_BK" />
+                    <externalMetadataColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[ProductoSK]"
+                      dataType="i4"
+                      name="ProductoSK" />
+                    <externalMetadataColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[ClienteSK]"
+                      dataType="i4"
+                      name="ClienteSK" />
+                    <externalMetadataColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[EmpleadoSK]"
+                      dataType="i4"
+                      name="EmpleadoSK" />
+                    <externalMetadataColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[SucursalSK]"
+                      dataType="i4"
+                      name="SucursalSK" />
+                    <externalMetadataColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[TiempoSK]"
+                      dataType="i4"
+                      name="TiempoSK" />
+                    <externalMetadataColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[NumeroDocumento]"
+                      dataType="i4"
+                      name="NumeroDocumento" />
+                    <externalMetadataColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[TipoDocumento]"
+                      dataType="wstr"
+                      length="255"
+                      name="TipoDocumento" />
+                    <externalMetadataColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[Cantidad]"
+                      dataType="i4"
+                      name="Cantidad" />
+                    <externalMetadataColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[PrecioUnitario]"
+                      dataType="i4"
+                      name="PrecioUnitario" />
+                    <externalMetadataColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[Descuento]"
+                      dataType="numeric"
+                      name="Descuento"
+                      precision="5"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[MontoTotal]"
+                      dataType="i4"
+                      name="MontoTotal" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Error Output]"
+                  isErrorOut="true"
+                  name="ODBC Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Error Output].Columns[VentaID_BK]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[VentaID_BK]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Error Output].Columns[VentaID_BK]"
+                      name="VentaID_BK" />
+                    <outputColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Error Output].Columns[ProductoSK]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[ProductoSK]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Error Output].Columns[ProductoSK]"
+                      name="ProductoSK" />
+                    <outputColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Error Output].Columns[ClienteSK]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[ClienteSK]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Error Output].Columns[ClienteSK]"
+                      name="ClienteSK" />
+                    <outputColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Error Output].Columns[EmpleadoSK]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[EmpleadoSK]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Error Output].Columns[EmpleadoSK]"
+                      name="EmpleadoSK" />
+                    <outputColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Error Output].Columns[SucursalSK]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[SucursalSK]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Error Output].Columns[SucursalSK]"
+                      name="SucursalSK" />
+                    <outputColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Error Output].Columns[TiempoSK]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[TiempoSK]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Error Output].Columns[TiempoSK]"
+                      name="TiempoSK" />
+                    <outputColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Error Output].Columns[NumeroDocumento]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[NumeroDocumento]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Error Output].Columns[NumeroDocumento]"
+                      name="NumeroDocumento" />
+                    <outputColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Error Output].Columns[TipoDocumento]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[TipoDocumento]"
+                      length="255"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Error Output].Columns[TipoDocumento]"
+                      name="TipoDocumento" />
+                    <outputColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Error Output].Columns[Cantidad]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[Cantidad]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Error Output].Columns[Cantidad]"
+                      name="Cantidad" />
+                    <outputColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Error Output].Columns[PrecioUnitario]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[PrecioUnitario]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Error Output].Columns[PrecioUnitario]"
+                      name="PrecioUnitario" />
+                    <outputColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Error Output].Columns[Descuento]"
+                      dataType="numeric"
+                      externalMetadataColumnId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[Descuento]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Error Output].Columns[Descuento]"
+                      name="Descuento"
+                      precision="5"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Error Output].Columns[MontoTotal]"
+                      dataType="i4"
+                      externalMetadataColumnId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output].ExternalColumns[MontoTotal]"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Error Output].Columns[MontoTotal]"
+                      name="MontoTotal" />
+                    <outputColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Hechos Ventas.Paths[ODBC Source Output]"
+              endId="Package\Hechos Ventas\Destino HechoVenta.Inputs[ODBC Destination Input]"
+              name="ODBC Source Output"
+              startId="Package\Hechos Ventas\Origen HechoVenta.Outputs[ODBC Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{00D55743-70C6-4A67-84B3-AED6E3D11DC1}"
+      DTS:From="Package\Eliminar Datos"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Dimension Clientes" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{2A8F831E-AB8E-4513-A9FF-F495C48B7566}"
+      DTS:From="Package\Dimension Clientes"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Dimension Tiempo" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{2764A658-F18D-4A15-A65F-67D296F8309A}"
+      DTS:From="Package\Dimension Tiempo"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Dimension Ubicacion" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{1EBD36B1-7BF8-41DF-8967-88BEA9B68FE3}"
+      DTS:From="Package\Dimension Ubicacion"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Dimension Vendedores" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{6BE98C72-D822-41B4-9112-7E660237E824}"
+      DTS:From="Package\Dimension Vendedores"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Dimension Producto" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{918B6DC2-DA6C-4D07-BA88-847C4125ECB5}"
+      DTS:From="Package\Dimension Producto"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Hechos Ventas" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Eliminar Datos"
+          TopLeft="52,63" />
+        <NodeLayout
+          Size="174,42"
+          Id="Package\Dimension Clientes"
+          TopLeft="284.5,64.5" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Dimension Tiempo"
+          TopLeft="506,65" />
+        <NodeLayout
+          Size="182,42"
+          Id="Package\Dimension Ubicacion"
+          TopLeft="497,156" />
+        <NodeLayout
+          Size="193,42"
+          Id="Package\Dimension Vendedores"
+          TopLeft="256,154" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="203,84.75">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="81.5,0"
+              Start="0,0"
+              End="74,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="74,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="458.5,85.75">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="47.5,0"
+              Start="0,0"
+              End="40,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="40,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="589.75,107">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49"
+              Start="0,0"
+              End="0,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="497,176">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-48,0"
+              Start="0,0"
+              End="-40.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-40.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="178,42"
+          Id="Package\Dimension Producto"
+          TopLeft="48,153" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="256,174.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-30,0"
+              Start="0,0"
+              End="-22.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-22.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="153,42"
+          Id="Package\Hechos Ventas"
+          TopLeft="61,248" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="137.25,195">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53"
+              Start="0,0"
+              End="0,45.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Dimension Clientes">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="149,42"
+          Id="Package\Dimension Clientes\Origen Cliente"
+          TopLeft="110,132" />
+        <NodeLayout
+          Size="173,42"
+          Id="Package\Dimension Clientes\Destino DimCliente"
+          TopLeft="390,136" />
+        <EdgeLayout
+          Id="Package\Dimension Clientes.Paths[ODBC Source Output]"
+          TopLeft="259,155">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="131,0"
+              Start="0,0"
+              End="123.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="123.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dimension Clientes\Origen Cliente">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dimension Clientes\Destino DimCliente">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Dimension Tiempo">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Dimension Tiempo\Origen Tiempo"
+          TopLeft="125,132" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Dimension Tiempo\Destino DimTiempo"
+          TopLeft="442,133" />
+        <EdgeLayout
+          Id="Package\Dimension Tiempo.Paths[ODBC Source Output]"
+          TopLeft="277,153.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="165,0"
+              Start="0,0"
+              End="157.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="157.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dimension Tiempo\Origen Tiempo">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dimension Tiempo\Destino DimTiempo">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Dimension Ubicacion">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Dimension Ubicacion\Origen Ubicacion"
+          TopLeft="110,132" />
+        <NodeLayout
+          Size="187,42"
+          Id="Package\Dimension Ubicacion\Destino DimUbicacion"
+          TopLeft="390,136" />
+        <EdgeLayout
+          Id="Package\Dimension Ubicacion.Paths[ODBC Source Output]"
+          TopLeft="273,155">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="117,0"
+              Start="0,0"
+              End="109.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="109.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dimension Ubicacion\Origen Ubicacion">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dimension Ubicacion\Destino DimUbicacion">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Dimension Vendedores">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="174,42"
+          Id="Package\Dimension Vendedores\Origen Vendedores"
+          TopLeft="110,132" />
+        <NodeLayout
+          Size="179,42"
+          Id="Package\Dimension Vendedores\Destino Vendedores"
+          TopLeft="390,136" />
+        <EdgeLayout
+          Id="Package\Dimension Vendedores.Paths[ODBC Source Output]"
+          TopLeft="284,155">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="106,0"
+              Start="0,0"
+              End="98.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="98.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dimension Vendedores\Origen Vendedores">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dimension Vendedores\Destino Vendedores">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Dimension Producto">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Dimension Producto\Origen Producto"
+          TopLeft="110,132" />
+        <NodeLayout
+          Size="183,42"
+          Id="Package\Dimension Producto\Destino DimProducto"
+          TopLeft="390,136" />
+        <EdgeLayout
+          Id="Package\Dimension Producto.Paths[ODBC Source Output]"
+          TopLeft="269,155">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="121,0"
+              Start="0,0"
+              End="113.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="113.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dimension Producto\Origen Producto">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dimension Producto\Destino DimProducto">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Hechos Ventas">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Hechos Ventas\Origen HechoVenta"
+          TopLeft="110,132" />
+        <NodeLayout
+          Size="180,42"
+          Id="Package\Hechos Ventas\Destino HechoVenta"
+          TopLeft="390,136" />
+        <EdgeLayout
+          Id="Package\Hechos Ventas.Paths[ODBC Source Output]"
+          TopLeft="286,155">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="104,0"
+              Start="0,0"
+              End="96.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="96.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Hechos Ventas\Origen HechoVenta">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Hechos Ventas\Destino HechoVenta">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
