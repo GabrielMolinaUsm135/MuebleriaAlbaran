@@ -87,7 +87,7 @@ Cada dimensión usa una **clave subrogada entera** como PK y conserva la **clave
 
 ### 4.6 Diagrama
 
-![Diagrama dimensional](docs/Diagrama_Dimensional.png)
+[![Diagrama dimensional](docs/Diagrama_Dimensional.png)](https://raw.githubusercontent.com/GabrielMolinaUsm135/MuebleriaAlbaran/refs/heads/main/docs/Modelo%20Dimensional.png)
 
 ---
 
