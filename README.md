@@ -16,7 +16,7 @@
 | Gabriel Molina | [GabrielMolinaUsm135](https://github.com/GabrielMolinaUsm135) |
 | Macarena Mogollón | [makimogollon](https://github.com/makimogollon) |
 | Lukas Cordova | [lukascordova](https://github.com/lukascordova) |
-| Daniel Garcia | GonzalezDanielRojas |
+| Daniel González | GonzalezDanielRojas |
 
 ---
 
