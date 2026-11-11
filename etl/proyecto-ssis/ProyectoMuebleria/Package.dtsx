@@ -254,7 +254,7 @@
     cliente_id AS ClienteID_BK,
     CAST(LTRIM(RTRIM(CONCAT(nombre, ' ', appaterno, ' ', apmaterno))) AS VARCHAR(150)) AS NombreCompletoCliente,
     CAST(CASE sexo WHEN 'M' THEN 'Masculino' WHEN 'F' THEN 'Femenino' ELSE 'No especificado' END AS VARCHAR(20)) AS NombreSexo,
-    CAST(estado_civil AS VARCHAR(50)) AS EstadoCivilCliente,
+    CAST(ISNULL(estado_civil, 'Sin Información') AS VARCHAR(50)) AS EstadoCivilCliente,
     CAST(fecha_nacimiento AS DATE) AS FechaNacimientoCliente
 FROM clientes;</property>
                 <property
@@ -638,10 +638,10 @@ FROM clientes;</property>
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
     p.producto_id AS ProductoID_BK,
     CAST(p.nombre AS VARCHAR(100)) AS NombreProducto,
-    CAST(c.categoria AS VARCHAR(100)) AS NombreCategoria,
+    CAST(ISNULL(c.categoria, 'General') AS VARCHAR(100)) AS NombreCategoria,
     CAST(p.precio AS DECIMAL(12,2)) AS PrecioUnitarioReferencial
 FROM productos p
-INNER JOIN categorias c ON p.categoria_id = c.categoria_id;</property>
+LEFT JOIN categorias c ON p.categoria_id = c.categoria_id;</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1043,7 +1043,8 @@ INNER JOIN categorias c ON p.categoria_id = c.categoria_id;</property>
        CAST(DATENAME(MONTH, fecha)   AS VARCHAR(20)) AS NombreMes,
        DAY(fecha)                                    AS NumeroDia,
        CAST(DATENAME(WEEKDAY, fecha) AS VARCHAR(20)) AS NombreDiaSemana
-   FROM ventas;</property>
+   FROM ventas
+   WHERE fecha IS NOT NULL;</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1459,9 +1460,9 @@ INNER JOIN categorias c ON p.categoria_id = c.categoria_id;</property>
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
     s.sucursal_id AS SucursalID_BK,
     CAST(s.sucursal AS VARCHAR(100)) AS NombreSucursal,
-    CAST(c.comuna AS VARCHAR(100)) AS NombreComuna
+    CAST(ISNULL(c.comuna, 'Sin Comuna') AS VARCHAR(100)) AS NombreComuna
 FROM sucursales s
-INNER JOIN comunas c ON s.comuna_id = c.comuna_id;</property>
+LEFT JOIN comunas c ON s.comuna_id = c.comuna_id;</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1797,10 +1798,10 @@ INNER JOIN comunas c ON s.comuna_id = c.comuna_id;</property>
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
     e.empleado_id AS EmpleadoID_BK,
     CAST(LTRIM(RTRIM(CONCAT(e.nombre, ' ', e.appaterno, ' ', e.apmaterno))) AS VARCHAR(150)) AS NombreCompletoEmpleado,
-    CAST(c.nombre AS VARCHAR(100)) AS NombreCargo,
+    CAST(ISNULL(c.nombre, 'Sin Cargo') AS VARCHAR(100)) AS NombreCargo,
     CAST(e.fecha_contrato AS DATE) AS FechaContratoEmpleado
 FROM empleados e
-INNER JOIN cargos c ON e.cargo_id = c.cargo_id;</property>
+LEFT JOIN cargos c ON e.cargo_id = c.cargo_id;</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -2262,19 +2263,20 @@ INNER JOIN cargos c ON e.cargo_id = c.cargo_id;</property>
     dc.ClienteSK,
     de.EmpleadoSK,
     ds.SucursalSK,
-    CAST(CONVERT(VARCHAR(8), v.fecha, 112) AS INT)     AS TiempoSK,
+    dt.TiempoSK,
     CAST(v.numero_documento AS VARCHAR(50))            AS NumeroDocumento,
     CAST(v.tipo_documento   AS VARCHAR(50))            AS TipoDocumento,
     dv.cantidad                                        AS CantidadProducto,
     CAST(dv.precio_unitario AS DECIMAL(12,2))          AS PrecioUnitarioProducto,
-    CAST(dv.descuento       AS DECIMAL(12,2))          AS DescuentoProducto,
-    CAST(dv.cantidad * dv.precio_unitario AS DECIMAL(12,2)) AS MontoTotalVenta
+    CAST(ISNULL(dv.descuento, 0) AS DECIMAL(12,2))     AS DescuentoProducto,
+    CAST(dv.cantidad * dv.precio_unitario - ISNULL(dv.descuento, 0) AS DECIMAL(12,2)) AS MontoTotalVenta
 FROM ventas v
 INNER JOIN detalle_ventas dv ON v.venta_id = dv.venta_id
 INNER JOIN DW_Albarran.dbo.DimProducto  dp ON dp.ProductoID_BK  = dv.producto_id
 INNER JOIN DW_Albarran.dbo.DimCliente   dc ON dc.ClienteID_BK   = v.cliente_id
 INNER JOIN DW_Albarran.dbo.DimEmpleado  de ON de.EmpleadoID_BK  = v.vendedor_id
-INNER JOIN DW_Albarran.dbo.DimSucursal  ds ON ds.SucursalID_BK  = v.sucursal_id;</property>
+INNER JOIN DW_Albarran.dbo.DimSucursal  ds ON ds.SucursalID_BK  = v.sucursal_id
+INNER JOIN DW_Albarran.dbo.DimTiempo   dt ON dt.TiempoSK = CAST(CONVERT(VARCHAR(8), v.fecha, 112) AS INT);</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."

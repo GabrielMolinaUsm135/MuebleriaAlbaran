@@ -1,7 +1,9 @@
-# Certamen 2 – Inteligencia de Negocios
+# Certamen 2 - Inteligencia de Negocios
+
 **Universidad Técnica Federico Santa María · Año académico 2026**
 
 ## Caso seleccionado
+
 **Caso 1: Mueblería Albarrán**
 
 | Dato | Detalle |
@@ -9,123 +11,161 @@
 | Sección | 300 |
 | Profesor | Hernán Saavedra |
 
-### Integrantes
+## Integrantes
 
 | Integrante | Usuario GitHub |
 |---|---|
 | Gabriel Molina | [GabrielMolinaUsm135](https://github.com/GabrielMolinaUsm135) |
 | Macarena Mogollón | [makimogollon](https://github.com/makimogollon) |
 | Lukas Cordova | [lukascordova](https://github.com/lukascordova) |
-| Daniel González | GonzalezDanielRojas |
-
----
+| Daniel González | `GonzalezDanielRojas` |
 
 ## 1. Descripción del problema
 
-Mueblería Albarrán es una empresa innovadora del rubro de la mueblería que ha crecido rápidamente en los últimos años. Sus datos operativos se almacenan en una base de datos transaccional relacional que registra sucursales (y sus comunas), clientes, empleados (y sus cargos), productos (y sus categorías) y ventas con su detalle.
+La Mueblería Albarrán almacena en una base de datos relacional información de sucursales y comunas, clientes, empleados y cargos, productos y categorías, ventas y detalle de ventas. El proyecto propone una solución de Inteligencia de Negocios que consolide estos datos para analizar el desempeño de las ventas y apoyar las decisiones del propietario.
 
-Sin embargo, la empresa no dispone de una solución de Inteligencia de Negocios optimizada para analítica, lo que dificulta consolidar información histórica y apoyar de forma oportuna las decisiones estratégicas del propietario.
+## 2. Objetivo y alcance
 
-## 2. Objetivo del proyecto
+Desarrollar una solución de Inteligencia de Negocios para analizar las ventas de la empresa.
 
-Desarrollar una solución de Inteligencia de Negocios que apoye al dueño de la empresa en su toma de decisiones. El proyecto se construye en dos fases:
-
-- **Fase 1:** diseño e implementación del modelo dimensional (Data Warehouse) y del proceso ETL con SSIS.
+- **Fase 1:** diseñar e implementar el Data Warehouse dimensional y el proceso ETL con SQL Server y SSIS.
+- **Fase 2:** analizar los KPI mediante un cubo OLAP en SSAS y un dashboard en Power BI.
 
 ## 3. KPI definidos
 
-| KPI | Fórmula | Justificación |
+| KPI | Fórmula | Utilidad |
 |---|---|---|
-| **Total de Ventas Netas ($)** | Σ (cantidad × precio_unitario − descuento) | Mide los ingresos reales tras descuentos; es la base para evaluar la salud financiera del negocio. |
-| **Volumen de Unidades Vendidas** | Σ cantidad | Permite identificar rotación de stock, demanda por categoría y volumen físico por sucursal. |
-| **Ticket Promedio por Venta ($)** | Total Ventas Netas / N° de transacciones<br>`SUM(monto_total) / COUNT(DISTINCT num_documento)` | Cuantifica el gasto medio por transacción y permite evaluar efectividad comercial y comportamiento de compra. |
-| **Descuento Promedio Otorgado (%)** | Σ descuento / Σ (cantidad × precio_unitario) × 100 | Controla el margen cedido en promociones y estrategias comerciales. |
+| **Total de ventas netas ($)** | `SUM(MontoTotalVenta)`, donde `MontoTotalVenta = CantidadProducto × PrecioUnitarioProducto − DescuentoProducto` | Mide los ingresos después de aplicar descuentos. |
+| **Unidades vendidas** | `SUM(CantidadProducto)` | Permite analizar volumen y demanda por producto, categoría y sucursal. |
+| **Ticket promedio por venta ($)** | `SUM(MontoTotalVenta) / COUNT(DISTINCT VentaID_BK)` | Mide el monto neto medio por transacción. |
+| **Descuento promedio otorgado (%)** | `SUM(DescuentoProducto) / SUM(CantidadProducto × PrecioUnitarioProducto) × 100` | Mide la proporción descontada respecto del monto bruto vendido. |
 
-Todos los KPI pueden segmentarse por **tiempo, sucursal/comuna, producto/categoría, vendedor/cargo y perfil de cliente**.
+Los KPI se pueden analizar por fecha, sucursal y comuna, producto y categoría, empleado y cargo, y cliente.
 
----
+Los datos transaccionales permiten calcular los KPI porque contienen el encabezado y detalle de ventas, con fecha, producto, cantidad, precio y descuento, además de las entidades que permiten segmentar por cliente, empleado y sucursal. En la transformación se consideran posibles valores nulos, fechas faltantes, relaciones a categoría/cargo/comuna no encontradas y espacios sobrantes. La ejecución de las validaciones de origen y destino se documenta en la sección **Validación de la carga**.
 
 ## 4. Modelo dimensional
 
-Esquema en estrella basado en la metodología de **Ralph Kimball**.
-
-### 4.1 Resumen de los 4 pasos de Kimball
+Se utiliza un esquema estrella siguiendo los cuatro pasos de Kimball:
 
 | Paso | Decisión |
 |---|---|
-| 1. Proceso de negocio | Ventas y facturación en sucursales |
-| 2. Granularidad | Una línea de producto por documento de venta |
-| 3. Dimensiones | Cliente, Producto, Empleado, Sucursal, Tiempo |
-| 4. Medidas y tabla de hechos | `Fact_Detalle_Venta` con cantidad, precio_unitario, descuento y monto_total |
+| Proceso de negocio | Ventas y facturación de productos en las sucursales. |
+| Granularidad | Una fila por línea de detalle de una venta. |
+| Dimensiones | Cliente, producto, empleado, sucursal y tiempo. |
+| Medidas y tabla de hechos | `FactVentas`: cantidad, precio unitario, descuento y monto neto. |
 
-### 4.2 Proceso de negocio
-Ventas y facturación de muebles y productos en las sucursales de la empresa.
+### Dimensiones
 
-### 4.3 Granularidad
-Un registro por cada línea de producto dentro de un documento de venta (equivale a una fila de `detalle_ventas`, identificada por `venta_id + producto_id`). Este nivel atómico permite análisis tanto agregados como detallados.
+Las dimensiones de cliente, producto, empleado y sucursal tienen una clave subrogada `IDENTITY` y conservan la clave de negocio de origen (`*_BK`). La dimensión de tiempo utiliza como clave primaria la fecha en formato entero `YYYYMMDD`.
 
-### 4.4 Dimensiones
-Cada dimensión usa una **clave subrogada entera** como PK y conserva la **clave de origen** (*business key*) para el mapeo en el ETL.
-
-| Dimensión | Atributos |
+| Tabla | Atributos |
 |---|---|
-| `Dim_Cliente` | id_cliente (PK), cliente_id_origen, nombre, apellido_paterno, apellido_materno, nombre_completo (derivado), sexo, fecha_nacimiento, estado_civil |
-| `Dim_Producto` | id_producto (PK), producto_id_origen, nombre_producto, descripcion, precio_referencial, categoria (desnormalizado desde `categorias`) |
-| `Dim_Empleado` | id_empleado (PK), empleado_id_origen, nombre, apellido_paterno, apellido_materno, nombre_cargo (desnormalizado desde `cargos`), fecha_contrato, sueldo_base |
-| `Dim_Sucursal` | id_sucursal (PK), sucursal_id_origen, sucursal, comuna (desnormalizado desde `comunas`) |
-| `Dim_Tiempo` | id_tiempo (PK, entero YYYYMMDD), fecha, anio, mes, nombre_mes, dia, dia_semana, trimestre |
+| `DimCliente` | `ClienteSK`, `ClienteID_BK`, `NombreCompletoCliente`, `NombreSexo`, `EstadoCivilCliente`, `FechaNacimientoCliente` |
+| `DimProducto` | `ProductoSK`, `ProductoID_BK`, `NombreProducto`, `NombreCategoria`, `PrecioUnitarioReferencial` |
+| `DimEmpleado` | `EmpleadoSK`, `EmpleadoID_BK`, `NombreCompletoEmpleado`, `NombreCargo`, `FechaContratoEmpleado` |
+| `DimSucursal` | `SucursalSK`, `SucursalID_BK`, `NombreSucursal`, `NombreComuna` |
+| `DimTiempo` | `TiempoSK`, `Fecha`, `Anio`, `Trimestre`, `NumeroMes`, `NombreMes`, `NumeroDia`, `NombreDiaSemana` |
 
-### 4.5 Tabla de hechos: `Fact_Detalle_Venta`
+### Tabla de hechos
 
-- **Claves foráneas:** `id_tiempo`, `id_cliente`, `id_empleado`, `id_sucursal`, `id_producto`.
-- **Dimensiones degeneradas:** `num_documento`, `tipo_documento`.
-- **Medidas aditivas:**
-  - `cantidad`: unidades vendidas.
-  - `precio_unitario`: precio facturado por ítem.
-  - `descuento`: rebaja aplicada al ítem.
-  - `monto_total`: `cantidad × precio_unitario − descuento`.
+`FactVentas` almacena una fila por línea de venta. Sus claves foráneas son `ProductoSK`, `ClienteSK`, `EmpleadoSK`, `SucursalSK` y `TiempoSK`. `NumeroDocumento` y `TipoDocumento` se conservan como dimensiones degeneradas.
 
-### 4.6 Diagrama
-
-[![Diagrama dimensional](docs/Diagrama_Dimensional.png)](https://raw.githubusercontent.com/GabrielMolinaUsm135/MuebleriaAlbaran/refs/heads/main/docs/Modelo%20Dimensional.png)
-
----
-
-## 5. Proceso ETL – Fase 1
-
-Implementado en **Visual Studio con SSIS**, desde la base transaccional hacia el modelo dimensional en **SQL Server**.
-
-### 5.1 Flujo general
-Primero se cargan las dimensiones (`Dim_Tiempo`, `Dim_Cliente`, `Dim_Producto`, `Dim_Empleado`, `Dim_Sucursal`) y luego `Fact_Detalle_Venta`, para respetar las claves foráneas.
-
-### 5.2 Transformaciones y calidad de datos
-
-| Aspecto | Tratamiento |
+| Medida | Descripción |
 |---|---|
-| Validación de consistencia | Se evitan nulos o valores inconsistentes en `descuento`, `cantidad` y `precio_unitario`. |
-| Estandarización de texto | Eliminación de espacios sobrantes y unificación de mayúsculas/minúsculas en categorías, cargos, comunas y nombres. |
-| Sustitución de nulos | Valores por defecto (p. ej. `"Sin Información"` en apellido materno) para mantener la integridad referencial. |
-| Desnormalización | Categoría, cargo y comuna se integran en sus dimensiones (producto, empleado, sucursal). |
-| Atributos derivados | `nombre_completo` en `Dim_Cliente`; `monto_total` en la tabla de hechos. |
-| Claves subrogadas | *Lookup* de la clave de origen hacia la clave subrogada al cargar la tabla de hechos. |
+| `CantidadProducto` | Unidades incluidas en la línea. |
+| `PrecioUnitarioProducto` | Precio unitario registrado en la venta. |
+| `DescuentoProducto` | Descuento aplicado a la línea. |
+| `MontoTotalVenta` | Monto neto de la línea: cantidad por precio unitario menos descuento. |
+
+`PrecioUnitarioProducto` es una medida no aditiva: no se debe sumar para obtener un total de ventas.
+
+### Diagrama
+
+![Diagrama estrella del Data Warehouse](modelo_dimensional/diagrama_estrella_dw.png)
+
+## 5. Proceso ETL - Fase 1
+
+El proyecto SSIS se encuentra en [`etl/proyecto-ssis/ProyectoMuebleria/`](etl/proyecto-ssis/ProyectoMuebleria/). El paquete extrae datos de la base transaccional `Albarran` y los carga en `DW_Albarran`.
+
+El flujo carga las dimensiones antes de la tabla de hechos para que las claves foráneas estén disponibles. En la carga de hechos se resuelven las claves de negocio hacia las claves subrogadas. La dimensión de tiempo usa la clave `YYYYMMDD`, compartida entre la dimensión y los hechos.
+
+### Transformaciones documentadas
+
+- Se eliminan espacios sobrantes al componer nombres de clientes y empleados.
+- El sexo del cliente se estandariza (`M` como masculino, `F` como femenino y otros valores como no especificados).
+- Categoría, cargo y comuna se integran en las dimensiones de producto, empleado y sucursal.
+- Se asignan valores por defecto cuando no se encuentra categoría, cargo o comuna; el descuento nulo se trata como cero.
+- El monto neto de cada línea resta el descuento al producto de cantidad por precio unitario.
+- Las ventas sin fecha no se incorporan a la dimensión de tiempo.
 
 ## 6. Validación de la carga
 
+Ejecutar estas consultas en SQL Server después de cargar el Data Warehouse. Las filas de origen y destino, y los montos netos, deben coincidir. Si no coinciden, revisar errores o filas no cargadas antes de considerar validado el proceso.
+
 ```sql
--- Total de la boleta de ejemplo
-SELECT num_documento, SUM(monto_total) AS Total_Final_Boleta
-FROM Fact_Detalle_Venta
-WHERE num_documento = 1050
-GROUP BY num_documento;
+USE DW_Albarran;
+GO
 
--- Cuadratura de filas origen vs. destino (ajustar nombres de BD)
-SELECT (SELECT COUNT(*) FROM <BD_ORIGEN>.dbo.detalle_ventas) AS filas_origen,
-       (SELECT COUNT(*) FROM <BD_DW>.dbo.Fact_Detalle_Venta) AS filas_destino;
+-- Comparar el número de líneas de venta.
+SELECT
+    (SELECT COUNT(*) FROM Albarran.dbo.detalle_ventas) AS FilasOrigen,
+    (SELECT COUNT(*) FROM dbo.FactVentas) AS FilasDestino;
 
--- Cuadratura de monto total
-SELECT SUM(cantidad * precio_unitario - descuento) AS monto_origen
-FROM <BD_ORIGEN>.dbo.detalle_ventas;
+-- Comparar el monto neto de origen y destino.
+SELECT
+    (SELECT SUM(dv.cantidad * dv.precio_unitario - ISNULL(dv.descuento, 0))
+     FROM Albarran.dbo.detalle_ventas AS dv) AS MontoNetoOrigen,
+    (SELECT SUM(MontoTotalVenta)
+     FROM dbo.FactVentas) AS MontoNetoDestino;
 
-SELECT SUM(monto_total) AS monto_destino
-FROM <BD_DW>.dbo.Fact_Detalle_Venta;
+-- Revisar el total neto de un documento de ejemplo.
+SELECT NumeroDocumento, SUM(MontoTotalVenta) AS TotalNetoDocumento
+FROM dbo.FactVentas
+WHERE NumeroDocumento = '1050'
+GROUP BY NumeroDocumento;
 ```
+
+## 7. Cubo OLAP - Fase 2
+
+El cubo OLAP debe permitir analizar los KPI definidos mediante las dimensiones de tiempo, cliente, producto, empleado y sucursal del Data Warehouse. El proyecto SSAS se debe incluir en `olap/proyecto-ssas/`.
+
+## 8. Dashboard Power BI - Fase 2
+
+El dashboard está destinado al propietario de la mueblería y debe presentar los KPI de ventas netas, unidades vendidas, ticket promedio y descuento promedio, con filtros para analizar los resultados por tiempo, sucursal, producto, vendedor y cliente. El archivo de Power BI se debe incluir en `powerbi/`.
+
+## 9. Tecnologías y estructura del repositorio
+
+**Tecnologías:** SQL Server, Visual Studio con SQL Server Integration Services (SSIS), SQL Server Analysis Services (SSAS), Power BI y GitHub.
+
+```text
+database/
+  backup/                         Backups de las bases de datos de origen y DW
+  scripts/                        Creación y carga SQL del Data Warehouse
+docs/                             Caso y pauta del certamen
+etl/proyecto-ssis/ProyectoMuebleria/
+                                  Solución y paquete ETL de SSIS
+modelo_dimensional/               Diagrama estrella
+olap/proyecto-ssas/                Ubicación del proyecto SSAS
+powerbi/                          Ubicación del archivo Power BI
+README.md                         Documentación del proyecto
+```
+
+## 10. Instrucciones de ejecución y revisión
+
+1. Restaurar el backup transaccional [`Albarran.bak`](database/backup/Albarran.bak) en SQL Server con el nombre `Albarran`, que es el utilizado por las conexiones y consultas del proyecto.
+2. Ejecutar [`01_creacion_dw_albarran.sql`](database/scripts/01_creacion_dw_albarran.sql) para crear el Data Warehouse.
+   **Advertencia:** este script elimina y vuelve a crear `DW_Albarran`. Respaldar la base antes de ejecutarlo si se desea conservarla.
+3. Para cargar el DW mediante SQL, ejecutar [`02_insercion_de_datos_al_dw.sql`](database/scripts/02_insercion_de_datos_al_dw.sql). Este script limpia las tablas del DW antes de insertar los datos.
+4. Para ejecutar el ETL, abrir [`ProyectoMuebleria.sln`](etl/proyecto-ssis/ProyectoMuebleria/ProyectoMuebleria.sln) en Visual Studio con la extensión de proyectos SSIS. Verificar las conexiones de origen `Albarran` y destino `DW_Albarran`, y ejecutar el paquete.
+5. Ejecutar las consultas de la sección **Validación de la carga** y guardar los resultados de la comprobación.
+
+## PENDIENTES (eliminar despues kbros)
+
+- Completar y guardar la distribución real de responsabilidades y aportes de cada integrante; respaldarla con commits identificables en GitHub. No se asignan tareas sin evidencia de autoría.
+
+- Agregar el informe y la presentación solicitados para la entrega, si aún no se encuentran en otra ubicación del equipo.
+- Ejecutar el proceso ETL en SQL Server/SSIS y registrar la evidencia de validación de filas y montos netos.
+- Verificar que [`DW_Albarran.bak`](database/backup/DW_Albarran.bak) corresponda a la versión cargada y que se pueda restaurar.
+- Completar el proyecto SSAS en `olap/proyecto-ssas/` y construir el cubo relacionado con los KPI (Fase 2).
+- Crear y comprobar el dashboard de Power BI en `powerbi/` (Fase 2); el archivo `dashboard.pbix` existente debe verificarse y reemplazarse si no contiene un informe válido.
