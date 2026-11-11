@@ -8,7 +8,7 @@ GO
 USE DW_Albarran;
 GO
 
--- 2. Crear Dimensi�n Cliente
+-- 2. Crear DimCliente
 CREATE TABLE DimCliente (
     ClienteSK INT IDENTITY(1,1) PRIMARY KEY,
     ClienteID_BK INT NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE DimCliente (
 );
 GO
 
--- 3. Crear Dimensi�n Empleado
+-- 3. Crear DimEmpleado
 CREATE TABLE DimEmpleado (
     EmpleadoSK INT IDENTITY(1,1) PRIMARY KEY,
     EmpleadoID_BK INT NOT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE DimEmpleado (
 );
 GO
 
--- 4. Crear Dimensi�n Sucursal
+-- 4. Crear DimSucursal
 CREATE TABLE DimSucursal (
     SucursalSK INT IDENTITY(1,1) PRIMARY KEY,
     SucursalID_BK INT NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE DimSucursal (
 );
 GO
 
--- 5. Crear Dimensi�n Producto
+-- 5. Crear DimProducto
 CREATE TABLE DimProducto (
     ProductoSK INT IDENTITY(1,1) PRIMARY KEY,
     ProductoID_BK INT NOT NULL,
@@ -48,15 +48,16 @@ CREATE TABLE DimProducto (
 );
 GO
 
--- 6. Crear Dimensi�n Tiempo (Con IDENTITY y NumeroTrimestre)
+-- 6. Crear DimTiempo con clave YYYYMMDD.
 CREATE TABLE DimTiempo (
-    TiempoSK INT IDENTITY(1,1) PRIMARY KEY,
+    TiempoSK INT PRIMARY KEY,
     Fecha DATE NOT NULL,
     Anio INT,
-    NumeroTrimestre INT,
+    Trimestre INT,
     NumeroMes INT,
     NombreMes VARCHAR(50),
-    NumeroDia INT
+    NumeroDia INT,
+    NombreDiaSemana VARCHAR(20)
 );
 GO
 
