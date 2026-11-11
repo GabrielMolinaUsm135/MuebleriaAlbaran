@@ -20,6 +20,8 @@
 | Lukas Cordova | [lukascordova](https://github.com/lukascordova) |
 | Daniel González | [GonzalezDanielRojas](https://github.com/GonzalezDanielRojas) |
 
+# ---------------------- FASE 1 ---------------------- 
+
 ## 1. Descripción del problema
 
 La Mueblería Albarrán almacena en una base de datos relacional información de sucursales y comunas, clientes, empleados y cargos, productos y categorías, ventas y detalle de ventas. El proyecto propone una solución de Inteligencia de Negocios que consolide estos datos para analizar el desempeño de las ventas y apoyar las decisiones del propietario.
@@ -80,15 +82,25 @@ Las dimensiones de cliente, producto, empleado y sucursal tienen una clave subro
 
 `PrecioUnitarioProducto` es una medida no aditiva: no se debe sumar para obtener un total de ventas.
 
-### Diagrama
+### Diagrama Modelo Dimensional (Estrella)
 
 ![Diagrama estrella del Data Warehouse](modelo_dimensional/diagrama_estrella_dw.png)
 
-## 5. Proceso ETL - Fase 1
+### Script de creación del DW
 
+### Script de insercción de datos al DW
+
+### Script de verificación de datos
+
+
+## 5. Proceso ETL
 El proyecto SSIS se encuentra en [`etl/proyecto-ssis/ProyectoMuebleria/`](etl/proyecto-ssis/ProyectoMuebleria/). El paquete extrae datos de la base transaccional `Albarran` y los carga en `DW_Albarran`.
 
 El flujo carga las dimensiones antes de la tabla de hechos para que las claves foráneas estén disponibles. En la carga de hechos se resuelven las claves de negocio hacia las claves subrogadas. La dimensión de tiempo usa la clave `YYYYMMDD`, compartida entre la dimensión y los hechos.
+
+### Diagrama de proceso ETL
+
+
 
 ### Transformaciones documentadas
 
@@ -99,42 +111,26 @@ El flujo carga las dimensiones antes de la tabla de hechos para que las claves f
 - El monto neto de cada línea resta el descuento al producto de cantidad por precio unitario.
 - Las ventas sin fecha no se incorporan a la dimensión de tiempo.
 
-## 6. Validación de la carga
+# ---------------------- FASE 2 ---------------------- 
 
-Ejecutar estas consultas en SQL Server después de cargar el Data Warehouse. Las filas de origen y destino, y los montos netos, deben coincidir. Si no coinciden, revisar errores o filas no cargadas antes de considerar validado el proceso.
-
-```sql
-USE DW_Albarran;
-GO
-
--- Comparar el número de líneas de venta.
-SELECT
-    (SELECT COUNT(*) FROM Albarran.dbo.detalle_ventas) AS FilasOrigen,
-    (SELECT COUNT(*) FROM dbo.FactVentas) AS FilasDestino;
-
--- Comparar el monto neto de origen y destino.
-SELECT
-    (SELECT SUM(dv.cantidad * dv.precio_unitario - ISNULL(dv.descuento, 0))
-     FROM Albarran.dbo.detalle_ventas AS dv) AS MontoNetoOrigen,
-    (SELECT SUM(MontoTotalVenta)
-     FROM dbo.FactVentas) AS MontoNetoDestino;
-
--- Revisar el total neto de un documento de ejemplo.
-SELECT NumeroDocumento, SUM(MontoTotalVenta) AS TotalNetoDocumento
-FROM dbo.FactVentas
-WHERE NumeroDocumento = '1050'
-GROUP BY NumeroDocumento;
-```
-
-## 7. Cubo OLAP - Fase 2
+## 7. Cubo OLAP
 
 El cubo OLAP debe permitir analizar los KPI definidos mediante las dimensiones de tiempo, cliente, producto, empleado y sucursal del Data Warehouse. El proyecto SSAS se debe incluir en `olap/proyecto-ssas/`.
 
-## 8. Dashboard Power BI - Fase 2
+### Imagen donde se muestra el CUBO
+
+### Imagen de verificación de funcionamiento del CUBO
+
+## 8. Dashboard Power BI
 
 El dashboard está destinado al propietario de la mueblería y debe presentar los KPI de ventas netas, unidades vendidas, ticket promedio y descuento promedio, con filtros para analizar los resultados por tiempo, sucursal, producto, vendedor y cliente. El archivo de Power BI se debe incluir en `powerbi/`.
 
-## 9. Tecnologías y estructura del repositorio
+### Imagen del Dashboard
+
+
+# ---------------------- DOCUMENTACION ---------------------- 
+
+## 1. Tecnologías y estructura del repositorio
 
 **Tecnologías:** SQL Server, Visual Studio con SQL Server Integration Services (SSIS), SQL Server Analysis Services (SSAS), Power BI y GitHub.
 
@@ -151,7 +147,7 @@ powerbi/                          Ubicación del archivo Power BI
 README.md                         Documentación del proyecto
 ```
 
-## 10. Instrucciones de ejecución y revisión
+## 2. Instrucciones de ejecución y revisión
 
 1. Restaurar el backup transaccional [`Albarran.bak`](database/backup/Albarran.bak) en SQL Server con el nombre `Albarran`, que es el utilizado por las conexiones y consultas del proyecto.
 2. Ejecutar [`01_creacion_dw_albarran.sql`](database/scripts/01_creacion_dw_albarran.sql) para crear el Data Warehouse.
@@ -160,9 +156,9 @@ README.md                         Documentación del proyecto
 4. Para ejecutar el ETL, abrir [`ProyectoMuebleria.sln`](etl/proyecto-ssis/ProyectoMuebleria/ProyectoMuebleria.sln) en Visual Studio con la extensión de proyectos SSIS. Verificar las conexiones de origen `Albarran` y destino `DW_Albarran`, y ejecutar el paquete.
 5. Ejecutar las consultas de la sección **Validación de la carga** y guardar los resultados de la comprobación.
 
-## 11. responsabilidades y los principales aportes de cada  integrante
+# ---------------------- Responsabilidades y los principales aportes de cada  integrante ---------------------- 
 
-1.Gabriel Molina: Construir etl y las consultas de recepción de datos, revisón y edición del archivo README.md.
-2.Macarena Mogollón:construir cubo OLAP mediante SQL Server Analysis Services (SSAS).
-3.Lukas Cordova:Validar la salida de los datos en la aplicación PowerBI.
+1.Gabriel Molina: Construcción de ETL y las consultas de recepción de datos, revisón y edición del archivo README.md.
+2.Macarena Mogollón: Construcción del DW y consultas SQL de insercción y verificación de datos. Construcción cubo OLAP mediante SQL Server Analysis Services y sus KPI. Revisón y edición del archivo README.md.
+3.Lukas Cordova: Validar la salida de los datos en la aplicación PowerBI.
 4.Daniel González: Revisar archivo README.md, verificar los scripts SQL.
