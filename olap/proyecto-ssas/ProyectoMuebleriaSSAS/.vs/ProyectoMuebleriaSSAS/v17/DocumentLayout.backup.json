@@ -1,0 +1,116 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Usuario\\Documents\\ProyectoMuebleriaSSAS\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0C5592BE-A745-1880-0D48-27D53758293D}|ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS.dwproj|C:\\Users\\Usuario\\Documents\\ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS\\DW Albarran.cube||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design",
+      "RelativeMoniker": "D:0:0:{0C5592BE-A745-1880-0D48-27D53758293D}|ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS.dwproj|solutionrelative:ProyectoMuebleriaSSAS\\DW Albarran.cube||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C5592BE-A745-1880-0D48-27D53758293D}|ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS.dwproj|C:\\Users\\Usuario\\Documents\\ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS\\Dim Tiempo.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design",
+      "RelativeMoniker": "D:0:0:{0C5592BE-A745-1880-0D48-27D53758293D}|ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS.dwproj|solutionrelative:ProyectoMuebleriaSSAS\\Dim Tiempo.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C5592BE-A745-1880-0D48-27D53758293D}|ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS.dwproj|C:\\Users\\Usuario\\Documents\\ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS\\Fact Ventas.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design",
+      "RelativeMoniker": "D:0:0:{0C5592BE-A745-1880-0D48-27D53758293D}|ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS.dwproj|solutionrelative:ProyectoMuebleriaSSAS\\Fact Ventas.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C5592BE-A745-1880-0D48-27D53758293D}|ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS.dwproj|C:\\Users\\Usuario\\Documents\\ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS\\Dim Producto.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design",
+      "RelativeMoniker": "D:0:0:{0C5592BE-A745-1880-0D48-27D53758293D}|ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS.dwproj|solutionrelative:ProyectoMuebleriaSSAS\\Dim Producto.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C5592BE-A745-1880-0D48-27D53758293D}|ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS.dwproj|C:\\Users\\Usuario\\Documents\\ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS\\Dim Sucursal.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design",
+      "RelativeMoniker": "D:0:0:{0C5592BE-A745-1880-0D48-27D53758293D}|ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS.dwproj|solutionrelative:ProyectoMuebleriaSSAS\\Dim Sucursal.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C5592BE-A745-1880-0D48-27D53758293D}|ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS.dwproj|C:\\Users\\Usuario\\Documents\\ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS\\Dim Empleado.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design",
+      "RelativeMoniker": "D:0:0:{0C5592BE-A745-1880-0D48-27D53758293D}|ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS.dwproj|solutionrelative:ProyectoMuebleriaSSAS\\Dim Empleado.dim||{B4191D15-2D32-45F2-906F-E91BBAAA6059}|Design"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Fact Ventas.dim [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Documents\\ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS\\Fact Ventas.dim",
+              "RelativeDocumentMoniker": "ProyectoMuebleriaSSAS\\Fact Ventas.dim",
+              "ToolTip": "C:\\Users\\Usuario\\Documents\\ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS\\Fact Ventas.dim [Dise\u00F1o]",
+              "RelativeToolTip": "ProyectoMuebleriaSSAS\\Fact Ventas.dim [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-11-10T13:22:16.825Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DW Albarran.cube [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Documents\\ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS\\DW Albarran.cube",
+              "RelativeDocumentMoniker": "ProyectoMuebleriaSSAS\\DW Albarran.cube",
+              "ToolTip": "C:\\Users\\Usuario\\Documents\\ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS\\DW Albarran.cube [Dise\u00F1o]",
+              "RelativeToolTip": "ProyectoMuebleriaSSAS\\DW Albarran.cube [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-11-10T13:05:54.992Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Dim Tiempo.dim [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Documents\\ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS\\Dim Tiempo.dim",
+              "RelativeDocumentMoniker": "ProyectoMuebleriaSSAS\\Dim Tiempo.dim",
+              "ToolTip": "C:\\Users\\Usuario\\Documents\\ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS\\Dim Tiempo.dim [Dise\u00F1o]",
+              "RelativeToolTip": "ProyectoMuebleriaSSAS\\Dim Tiempo.dim [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-11-10T13:07:02.039Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Dim Producto.dim [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Documents\\ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS\\Dim Producto.dim",
+              "RelativeDocumentMoniker": "ProyectoMuebleriaSSAS\\Dim Producto.dim",
+              "ToolTip": "C:\\Users\\Usuario\\Documents\\ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS\\Dim Producto.dim [Dise\u00F1o]",
+              "RelativeToolTip": "ProyectoMuebleriaSSAS\\Dim Producto.dim [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-11-10T13:08:37.89Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Dim Sucursal.dim [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Documents\\ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS\\Dim Sucursal.dim",
+              "RelativeDocumentMoniker": "ProyectoMuebleriaSSAS\\Dim Sucursal.dim",
+              "ToolTip": "C:\\Users\\Usuario\\Documents\\ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS\\Dim Sucursal.dim [Dise\u00F1o]",
+              "RelativeToolTip": "ProyectoMuebleriaSSAS\\Dim Sucursal.dim [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-11-10T13:08:49.903Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Dim Empleado.dim [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\Usuario\\Documents\\ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS\\Dim Empleado.dim",
+              "RelativeDocumentMoniker": "ProyectoMuebleriaSSAS\\Dim Empleado.dim",
+              "ToolTip": "C:\\Users\\Usuario\\Documents\\ProyectoMuebleriaSSAS\\ProyectoMuebleriaSSAS\\Dim Empleado.dim [Dise\u00F1o]",
+              "RelativeToolTip": "ProyectoMuebleriaSSAS\\Dim Empleado.dim [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-11-10T13:06:46.38Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
