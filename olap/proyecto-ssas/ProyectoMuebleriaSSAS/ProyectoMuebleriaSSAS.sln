@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37827.9 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "ProyectoMuebleriaSSAS", "ProyectoMuebleriaSSAS\ProyectoMuebleriaSSAS.dwproj", "{0C5592BE-A745-1880-0D48-27D53758293D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C5592BE-A745-1880-0D48-27D53758293D}.Development|Default.ActiveCfg = Development
+		{0C5592BE-A745-1880-0D48-27D53758293D}.Development|Default.Build.0 = Development
+		{0C5592BE-A745-1880-0D48-27D53758293D}.Development|Default.Deploy.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EB9C73CB-CA99-4046-9DBB-FE5D5958996A}
+	EndGlobalSection
+EndGlobal
