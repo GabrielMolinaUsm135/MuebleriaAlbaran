@@ -18,7 +18,7 @@
 | Gabriel Molina | [GabrielMolinaUsm135](https://github.com/GabrielMolinaUsm135) |
 | Macarena Mogollón | [makimogollon](https://github.com/makimogollon) |
 | Lukas Cordova | [lukascordova](https://github.com/lukascordova) |
-| Daniel González | `GonzalezDanielRojas` |
+| Daniel González | [GonzalezDanielRojas](https://github.com/GonzalezDanielRojas) |
 
 ## 1. Descripción del problema
 
@@ -29,7 +29,7 @@ La Mueblería Albarrán almacena en una base de datos relacional información de
 Desarrollar una solución de Inteligencia de Negocios para analizar las ventas de la empresa.
 
 - **Fase 1:** diseñar e implementar el Data Warehouse dimensional y el proceso ETL con SQL Server y SSIS.
-- **Fase 2:** analizar los KPI mediante un cubo OLAP en SSAS y un dashboard en Power BI.
+- **Fase 2:** el repositorio incluye el proyecto SSAS y el archivo `powerbi/dashboard.pbix`. Este README describe los KPI y análisis previstos.
 
 ## 3. KPI definidos
 
@@ -160,12 +160,9 @@ README.md                         Documentación del proyecto
 4. Para ejecutar el ETL, abrir [`ProyectoMuebleria.sln`](etl/proyecto-ssis/ProyectoMuebleria/ProyectoMuebleria.sln) en Visual Studio con la extensión de proyectos SSIS. Verificar las conexiones de origen `Albarran` y destino `DW_Albarran`, y ejecutar el paquete.
 5. Ejecutar las consultas de la sección **Validación de la carga** y guardar los resultados de la comprobación.
 
-## PENDIENTES (eliminar despues kbros)
+## 11. responsabilidades y los principales aportes de cada  integrante
 
-- Completar y guardar la distribución real de responsabilidades y aportes de cada integrante; respaldarla con commits identificables en GitHub. No se asignan tareas sin evidencia de autoría.
-
-- Agregar el informe y la presentación solicitados para la entrega, si aún no se encuentran en otra ubicación del equipo.
-- Ejecutar el proceso ETL en SQL Server/SSIS y registrar la evidencia de validación de filas y montos netos.
-- Verificar que [`DW_Albarran.bak`](database/backup/DW_Albarran.bak) corresponda a la versión cargada y que se pueda restaurar.
-- Completar el proyecto SSAS en `olap/proyecto-ssas/` y construir el cubo relacionado con los KPI (Fase 2).
-- Crear y comprobar el dashboard de Power BI en `powerbi/` (Fase 2); el archivo `dashboard.pbix` existente debe verificarse y reemplazarse si no contiene un informe válido.
+1.Gabriel Molina: Construir etl y las consultas de recepción de datos, revisón y edición del archivo README.md.
+2.Macarena Mogollón:construir cubo OLAP mediante SQL Server Analysis Services (SSAS).
+3.Lukas Cordova:Validar la salida de los datos en la aplicación PowerBI.
+4.Daniel González: Revisar archivo README.md, verificar los scripts SQL.
