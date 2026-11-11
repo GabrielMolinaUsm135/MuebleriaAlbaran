@@ -9,7 +9,8 @@ DELETE FROM DimEmpleado;
 DELETE FROM DimSucursal;
 DELETE FROM DimProducto;
 
--- 2. Cargar DimCliente (transformando M -> Masculino y F -> Femenino)
+-- 2. Cargar DimCliente
+-- 2. Cargar DimCliente (Transformando M -> Masculino y F -> Femenino)
 INSERT INTO DimCliente (ClienteID_BK, NombreCompletoCliente, NombreSexo, EstadoCivilCliente, FechaNacimientoCliente)
 SELECT DISTINCT 
     c.cliente_id, 
@@ -21,11 +22,11 @@ SELECT DISTINCT
         WHEN 'F' THEN 'Femenino'
         ELSE 'No especificado'
     END,
-    ISNULL(c.estado_civil, 'Sin Información'),
+    c.estado_civil,
     CAST(c.fecha_nacimiento AS DATE)
-FROM Albarran.dbo.clientes c;
+FROM MuebleriaAlbarran..clientes c;
 
--- 3. Cargar DimEmpleado
+-- 3. Cargar DimEmpleado (con alias e. en appatemo y apmatemo)
 INSERT INTO DimEmpleado (EmpleadoID_BK, NombreCompletoEmpleado, NombreCargo, FechaContratoEmpleado)
 SELECT DISTINCT 
     e.empleado_id, 
@@ -34,8 +35,8 @@ SELECT DISTINCT
     ISNULL(LTRIM(RTRIM(e.apmaterno)), ''),
     ISNULL(ca.nombre, 'Sin Cargo'),
     CAST(e.fecha_contrato AS DATE)
-FROM Albarran.dbo.empleados e
-LEFT JOIN Albarran.dbo.cargos ca ON e.cargo_id = ca.cargo_id;
+FROM MuebleriaAlbarran..empleados e
+LEFT JOIN MuebleriaAlbarran..cargos ca ON e.cargo_id = ca.cargo_id;
 
 -- 4. Cargar DimSucursal
 INSERT INTO DimSucursal (SucursalID_BK, NombreSucursal, NombreComuna)
@@ -43,8 +44,8 @@ SELECT DISTINCT
     s.sucursal_id, 
     s.sucursal, 
     ISNULL(co.comuna, 'Sin Comuna')
-FROM Albarran.dbo.sucursales s
-LEFT JOIN Albarran.dbo.comunas co ON s.comuna_id = co.comuna_id;
+FROM MuebleriaAlbarran..sucursales s
+LEFT JOIN MuebleriaAlbarran..comunas co ON s.comuna_id = co.comuna_id;
 
 -- 5. Cargar DimProducto (usando cat.categoria)
 INSERT INTO DimProducto (ProductoID_BK, NombreProducto, NombreCategoria, PrecioUnitarioReferencial)
@@ -53,21 +54,39 @@ SELECT DISTINCT
     p.nombre, 
     ISNULL(cat.categoria, 'General'),
     p.precio
-FROM Albarran.dbo.productos p
-LEFT JOIN Albarran.dbo.categorias cat ON p.categoria_id = cat.categoria_id;
+FROM MuebleriaAlbarran..productos p
+LEFT JOIN MuebleriaAlbarran..categorias cat ON p.categoria_id = cat.categoria_id;
 
-INSERT INTO DimTiempo (TiempoSK, Fecha, Anio, Trimestre, NumeroMes, NombreMes, NumeroDia, NombreDiaSemana)
+-- 6. Cargar DimTiempo (usando NumeroTrimestre)
+INSERT INTO DimTiempo (Fecha, Anio, NumeroTrimestre, NumeroMes, NombreMes, NumeroDia)
 SELECT DISTINCT 
-    CAST(CONVERT(CHAR(8), v.fecha, 112) AS INT) AS TiempoSK,
     CAST(v.fecha AS DATE) AS Fecha,
     YEAR(v.fecha) AS Anio,
-    DATEPART(QUARTER, v.fecha) AS Trimestre,
+    CASE 
+        WHEN MONTH(v.fecha) BETWEEN 1 AND 3 THEN 1
+        WHEN MONTH(v.fecha) BETWEEN 4 AND 6 THEN 2
+        WHEN MONTH(v.fecha) BETWEEN 7 AND 9 THEN 3
+        WHEN MONTH(v.fecha) BETWEEN 10 AND 12 THEN 4
+    END AS NumeroTrimestre,
     MONTH(v.fecha) AS NumeroMes,
-    DATENAME(MONTH, v.fecha) AS NombreMes,
-    DAY(v.fecha) AS NumeroDia,
-    DATENAME(WEEKDAY, v.fecha) AS NombreDiaSemana
-FROM Albarran.dbo.ventas v
-WHERE v.fecha IS NOT NULL;
+    CASE MONTH(v.fecha)
+        WHEN 1 THEN 'Enero'
+        WHEN 2 THEN 'Febrero'
+        WHEN 3 THEN 'Marzo'
+        WHEN 4 THEN 'Abril'
+        WHEN 5 THEN 'Mayo'
+        WHEN 6 THEN 'Junio'
+        WHEN 7 THEN 'Julio'
+        WHEN 8 THEN 'Agosto'
+        WHEN 9 THEN 'Septiembre'
+        WHEN 10 THEN 'Octubre'
+        WHEN 11 THEN 'Noviembre'
+        WHEN 12 THEN 'Diciembre'
+    END AS NombreMes,
+    DAY(v.fecha) AS NumeroDia
+FROM MuebleriaAlbarran..ventas v
+WHERE v.fecha IS NOT NULL
+ORDER BY CAST(v.fecha AS DATE);
 
 -- 7. Cargar FactVentas
 INSERT INTO FactVentas (
@@ -87,8 +106,8 @@ SELECT
     dv.precio_unitario,
     ISNULL(dv.descuento, 0),
     (CAST(dv.cantidad AS DECIMAL(18,2)) * CAST(dv.precio_unitario AS DECIMAL(18,2))) - ISNULL(dv.descuento, 0) AS MontoTotalVenta
-FROM Albarran.dbo.ventas v
-INNER JOIN Albarran.dbo.detalle_ventas dv ON v.venta_id = dv.venta_id
+FROM MuebleriaAlbarran..ventas v
+INNER JOIN MuebleriaAlbarran..detalle_ventas dv ON v.venta_id = dv.venta_id
 INNER JOIN DimCliente cli ON v.cliente_id = cli.ClienteID_BK
 INNER JOIN DimEmpleado emp ON v.vendedor_id = emp.EmpleadoID_BK
 INNER JOIN DimSucursal suc ON v.sucursal_id = suc.SucursalID_BK
