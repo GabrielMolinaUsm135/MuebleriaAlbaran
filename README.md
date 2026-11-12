@@ -20,7 +20,7 @@
 | Lukas Cordova | [lukascordova](https://github.com/lukascordova) |
 | Daniel González | [GonzalezDanielRojas](https://github.com/GonzalezDanielRojas) |
 
-# ---------------------- FASE 1 ---------------------- 
+# FASE 1
 
 ## 1. Descripción del problema
 
@@ -67,7 +67,7 @@ Las dimensiones de cliente, producto, empleado y sucursal tienen una clave subro
 | `DimProducto` | `ProductoSK`, `ProductoID_BK`, `NombreProducto`, `NombreCategoria`, `PrecioUnitarioReferencial` |
 | `DimEmpleado` | `EmpleadoSK`, `EmpleadoID_BK`, `NombreCompletoEmpleado`, `NombreCargo`, `FechaContratoEmpleado` |
 | `DimSucursal` | `SucursalSK`, `SucursalID_BK`, `NombreSucursal`, `NombreComuna` |
-| `DimTiempo` | `TiempoSK`, `Fecha`, `Anio`, `Trimestre`, `NumeroMes`, `NombreMes`, `NumeroDia`, `NombreDiaSemana` |
+| `DimTiempo` | `TiempoSK`, `Fecha`, `Anio`, `NumeroTrimestre`, `NumeroMes`, `NombreMes`, `NumeroDia` |
 
 ### Tabla de hechos
 
@@ -118,21 +118,31 @@ El flujo carga las dimensiones antes de la tabla de hechos para que las claves f
 - El monto neto de cada línea resta el descuento al producto de cantidad por precio unitario.
 - Las ventas sin fecha no se incorporan a la dimensión de tiempo.
 
-# ---------------------- FASE 2 ---------------------- 
+# FASE 2 
 
 ## 7. Cubo OLAP
 
 ### a. Conexión y Vista de Origen de Datos (DSV):
-Se creó el proyecto multidimensional en Visual Studio (Analysis Services) y se estableció la conexión directa al Data Warehouse de la mueblería en SQL Server. A partir de ahí, se generó la Vista de Origen de Datos importando el modelo estrella (FactVentas y todas sus tablas de dimensiones) para mapear las relaciones en el entorno analítico.   
+Se creó el proyecto multidimensional en Visual Studio (Analysis Services) y se estableció la conexión directa al Data Warehouse de la mueblería en SQL Server. A partir de ahí, se generó la Vista de Origen de Datos importando el modelo estrella (FactVentas y todas sus tablas de dimensiones) para mapear las relaciones en el entorno analítico.  
+
+![Vista de Origen de Datos](olap/imagen_dsv.png)
 
 ### b. Configuración de Dimensiones y Jerarquías:
 Se construyeron las dimensiones del cubo (DimTiempo, DimProducto, DimSucursal, DimEmpleado, DimCliente) exponiendo los atributos necesarios para el análisis.
+
+![Dimensiones y Jerarquías](olap/imagen_dimensiones_jerarquias.png)
   
 ### c. Definición de Medidas y Cálculos MDX:
 Se estructuró el cubo integrando las métricas base desde la tabla de hechos (MontoTotalVenta, CantidadProducto) y se programaron miembros calculados mediante expresiones MDX para obtener indicadores de negocio clave como el TicketPromedio y DescuentoPromedio definido anteriormente.
+
+![Cálculo Ticket Promedio](olap/imagen_calculo_ticket_promedio.png)
+
+![Cálculo Descuento Promedio](olap/imagen_calculo_descuento_promedio.png)
   
 ### d. Implementación (Deploy) y Procesamiento del Cubo: 
 Se compiló e implementó la solución en el servidor local de Analysis Services (localhost), procesando las estructuras y cargando los datos en memoria para dejar el cubo operativo y listo para ser consumido en vivo (Live Connection) desde Power BI. 
+
+![Implementación del Cubo](olap/imagen_implementacion.png)
 
 ## 8. Dashboard Power BI
 
@@ -150,7 +160,9 @@ Se integró un panel lateral de filtros desplegables (Nombre Completo Cliente, N
 
 ### Imagen dashboard
 
-# ------------------- DOCUMENTACIÓN ------------------- 
+![Dashboard de Power BI](powerbi/imagenDashboard.png)
+
+# DOCUMENTACIÓN
 
 ## 1. Tecnologías y estructura del repositorio
 
@@ -178,11 +190,11 @@ README.md                         Documentación del proyecto
 4. Para ejecutar el ETL, abrir [`ProyectoMuebleria.sln`](etl/proyecto-ssis/ProyectoMuebleria/ProyectoMuebleria.sln) en Visual Studio con la extensión de proyectos SSIS. Verificar las conexiones de origen `Albarran` y destino `DW_Albarran`, y ejecutar el paquete.
 5. Ejecutar las consultas de la sección **Validación de la carga** y guardar los resultados de la comprobación.
 
-# ------------- Responsabilidades y los principales aportes de cada  integrante ------------ 
+# Responsabilidades y los principales aportes de cada  integrante
 
 | Integrante | Aporte |
 |---|---|
 | Gabriel Molina | Construcción de ETL y las consultas de recepción de datos, revisón y edición del archivo README.md. |
 | Macarena Mogollón | Construcción del DW y consultas SQL de insercción y verificación de datos. Construcción cubo OLAP mediante SQL Server Analysis Services y sus KPI. Creacion de dashboard de powerbi con datos cargados anteriormente del cubo olap. Revisón y edición del archivo README.md. |
-| Lukas Cordova | Cliente, producto, empleado, sucursal y tiempo. |
+| Lukas Cordova | |
 | Daniel González | Revisar archivo README.md |
