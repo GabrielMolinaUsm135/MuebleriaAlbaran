@@ -87,11 +87,230 @@ Las dimensiones de cliente, producto, empleado y sucursal tienen una clave subro
 ![Diagrama estrella del Data Warehouse](modelo_dimensional/diagrama_estrella_dw.png)
 
 ### Script de creación del DW
+-- 1. Crear o reiniciar la base de datos del Data Warehouse
+DROP DATABASE IF EXISTS DW_Albarran;
+GO
+
+CREATE DATABASE DW_Albarran;
+GO
+
+USE DW_Albarran;
+GO
+
+-- 2. Crear Dimensi�n Cliente
+CREATE TABLE DimCliente (
+    ClienteSK INT IDENTITY(1,1) PRIMARY KEY,
+    ClienteID_BK INT NOT NULL,
+    NombreCompletoCliente VARCHAR(150),
+    NombreSexo VARCHAR(50),
+    EstadoCivilCliente VARCHAR(100),
+    FechaNacimientoCliente DATE
+);
+GO
+
+-- 3. Crear Dimensi�n Empleado
+CREATE TABLE DimEmpleado (
+    EmpleadoSK INT IDENTITY(1,1) PRIMARY KEY,
+    EmpleadoID_BK INT NOT NULL,
+    NombreCompletoEmpleado VARCHAR(150),
+    NombreCargo VARCHAR(100),
+    FechaContratoEmpleado DATE
+);
+GO
+
+-- 4. Crear Dimensi�n Sucursal
+CREATE TABLE DimSucursal (
+    SucursalSK INT IDENTITY(1,1) PRIMARY KEY,
+    SucursalID_BK INT NOT NULL,
+    NombreSucursal VARCHAR(100),
+    NombreComuna VARCHAR(100)
+);
+GO
+
+-- 5. Crear Dimensi�n Producto
+CREATE TABLE DimProducto (
+    ProductoSK INT IDENTITY(1,1) PRIMARY KEY,
+    ProductoID_BK INT NOT NULL,
+    NombreProducto VARCHAR(150),
+    NombreCategoria VARCHAR(100),
+    PrecioUnitarioReferencial DECIMAL(18,2)
+);
+GO
+
+-- 6. Crear Dimensi�n Tiempo (Con IDENTITY y NumeroTrimestre)
+CREATE TABLE DimTiempo (
+    TiempoSK INT IDENTITY(1,1) PRIMARY KEY,
+    Fecha DATE NOT NULL,
+    Anio INT,
+    NumeroTrimestre INT,
+    NumeroMes INT,
+    NombreMes VARCHAR(50),
+    NumeroDia INT
+);
+GO
+
+-- 7. Crear Tabla de Hechos (FactVentas)
+CREATE TABLE FactVentas (
+    VentaSK INT IDENTITY(1,1) PRIMARY KEY,
+    VentaID_BK INT NOT NULL,
+    ProductoSK INT FOREIGN KEY REFERENCES DimProducto(ProductoSK),
+    ClienteSK INT FOREIGN KEY REFERENCES DimCliente(ClienteSK),
+    EmpleadoSK INT FOREIGN KEY REFERENCES DimEmpleado(EmpleadoSK),
+    SucursalSK INT FOREIGN KEY REFERENCES DimSucursal(SucursalSK),
+    TiempoSK INT FOREIGN KEY REFERENCES DimTiempo(TiempoSK),
+    NumeroDocumento VARCHAR(50),
+    TipoDocumento VARCHAR(50),
+    CantidadProducto INT,
+    PrecioUnitarioProducto DECIMAL(18,2),
+    DescuentoProducto DECIMAL(18,2),
+    MontoTotalVenta DECIMAL(18,2)
+);
+GO
 
 ### Script de insercción de datos al DW
+USE DW_Albarran;
+GO
+
+-- 1. Limpieza previa en orden inverso por las Foreign Keys
+DELETE FROM FactVentas;
+DELETE FROM DimTiempo;
+DELETE FROM DimCliente;
+DELETE FROM DimEmpleado;
+DELETE FROM DimSucursal;
+DELETE FROM DimProducto;
+
+-- 2. Cargar DimCliente
+-- 2. Cargar DimCliente (Transformando M -> Masculino y F -> Femenino)
+INSERT INTO DimCliente (ClienteID_BK, NombreCompletoCliente, NombreSexo, EstadoCivilCliente, FechaNacimientoCliente)
+SELECT DISTINCT 
+    c.cliente_id, 
+    LTRIM(RTRIM(c.nombre)) + ' ' + 
+    ISNULL(LTRIM(RTRIM(c.appaterno)), '') + ' ' + 
+    ISNULL(LTRIM(RTRIM(c.apmaterno)), ''),
+    CASE UPPER(LTRIM(RTRIM(c.sexo)))
+        WHEN 'M' THEN 'Masculino'
+        WHEN 'F' THEN 'Femenino'
+        ELSE 'No especificado'
+    END,
+    c.estado_civil,
+    CAST(c.fecha_nacimiento AS DATE)
+FROM MuebleriaAlbarran..clientes c;
+
+-- 3. Cargar DimEmpleado (con alias e. en appatemo y apmatemo)
+INSERT INTO DimEmpleado (EmpleadoID_BK, NombreCompletoEmpleado, NombreCargo, FechaContratoEmpleado)
+SELECT DISTINCT 
+    e.empleado_id, 
+    LTRIM(RTRIM(e.nombre)) + ' ' + 
+    ISNULL(LTRIM(RTRIM(e.appaterno)), '') + ' ' + 
+    ISNULL(LTRIM(RTRIM(e.apmaterno)), ''),
+    ISNULL(ca.nombre, 'Sin Cargo'),
+    CAST(e.fecha_contrato AS DATE)
+FROM MuebleriaAlbarran..empleados e
+LEFT JOIN MuebleriaAlbarran..cargos ca ON e.cargo_id = ca.cargo_id;
+
+-- 4. Cargar DimSucursal
+INSERT INTO DimSucursal (SucursalID_BK, NombreSucursal, NombreComuna)
+SELECT DISTINCT 
+    s.sucursal_id, 
+    s.sucursal, 
+    ISNULL(co.comuna, 'Sin Comuna')
+FROM MuebleriaAlbarran..sucursales s
+LEFT JOIN MuebleriaAlbarran..comunas co ON s.comuna_id = co.comuna_id;
+
+-- 5. Cargar DimProducto (usando cat.categoria)
+INSERT INTO DimProducto (ProductoID_BK, NombreProducto, NombreCategoria, PrecioUnitarioReferencial)
+SELECT DISTINCT 
+    p.producto_id, 
+    p.nombre, 
+    ISNULL(cat.categoria, 'General'),
+    p.precio
+FROM MuebleriaAlbarran..productos p
+LEFT JOIN MuebleriaAlbarran..categorias cat ON p.categoria_id = cat.categoria_id;
+
+-- 6. Cargar DimTiempo (usando NumeroTrimestre)
+INSERT INTO DimTiempo (Fecha, Anio, NumeroTrimestre, NumeroMes, NombreMes, NumeroDia)
+SELECT DISTINCT 
+    CAST(v.fecha AS DATE) AS Fecha,
+    YEAR(v.fecha) AS Anio,
+    CASE 
+        WHEN MONTH(v.fecha) BETWEEN 1 AND 3 THEN 1
+        WHEN MONTH(v.fecha) BETWEEN 4 AND 6 THEN 2
+        WHEN MONTH(v.fecha) BETWEEN 7 AND 9 THEN 3
+        WHEN MONTH(v.fecha) BETWEEN 10 AND 12 THEN 4
+    END AS NumeroTrimestre,
+    MONTH(v.fecha) AS NumeroMes,
+    CASE MONTH(v.fecha)
+        WHEN 1 THEN 'Enero'
+        WHEN 2 THEN 'Febrero'
+        WHEN 3 THEN 'Marzo'
+        WHEN 4 THEN 'Abril'
+        WHEN 5 THEN 'Mayo'
+        WHEN 6 THEN 'Junio'
+        WHEN 7 THEN 'Julio'
+        WHEN 8 THEN 'Agosto'
+        WHEN 9 THEN 'Septiembre'
+        WHEN 10 THEN 'Octubre'
+        WHEN 11 THEN 'Noviembre'
+        WHEN 12 THEN 'Diciembre'
+    END AS NombreMes,
+    DAY(v.fecha) AS NumeroDia
+FROM MuebleriaAlbarran..ventas v
+WHERE v.fecha IS NOT NULL
+ORDER BY CAST(v.fecha AS DATE);
+
+-- 7. Cargar FactVentas
+INSERT INTO FactVentas (
+    VentaID_BK, ProductoSK, ClienteSK, EmpleadoSK, SucursalSK, TiempoSK, 
+    NumeroDocumento, TipoDocumento, CantidadProducto, PrecioUnitarioProducto, DescuentoProducto, MontoTotalVenta
+)
+SELECT 
+    v.venta_id,
+    prod.ProductoSK,
+    cli.ClienteSK,
+    emp.EmpleadoSK,
+    suc.SucursalSK,
+    t.TiempoSK,
+    v.numero_documento,
+    v.tipo_documento,
+    dv.cantidad,
+    dv.precio_unitario,
+    ISNULL(dv.descuento, 0),
+    (CAST(dv.cantidad AS DECIMAL(18,2)) * CAST(dv.precio_unitario AS DECIMAL(18,2))) - ISNULL(dv.descuento, 0) AS MontoTotalVenta
+FROM MuebleriaAlbarran..ventas v
+INNER JOIN MuebleriaAlbarran..detalle_ventas dv ON v.venta_id = dv.venta_id
+INNER JOIN DimCliente cli ON v.cliente_id = cli.ClienteID_BK
+INNER JOIN DimEmpleado emp ON v.vendedor_id = emp.EmpleadoID_BK
+INNER JOIN DimSucursal suc ON v.sucursal_id = suc.SucursalID_BK
+INNER JOIN DimProducto prod ON dv.producto_id = prod.ProductoID_BK
+INNER JOIN DimTiempo t ON CAST(v.fecha AS DATE) = t.Fecha;
 
 ### Script de verificación de datos
+USE DW_Albarran;
+GO
 
+SELECT 
+    v.VentaSK,
+    v.VentaID_BK,
+    t.Fecha,
+    t.Anio,
+    t.NombreMes,
+    s.NombreSucursal,
+    s.NombreComuna,
+    c.NombreCompletoCliente,
+    c.NombreSexo,
+    e.NombreCompletoEmpleado,
+    e.NombreCargo,
+    p.NombreProducto,
+    p.NombreCategoria,
+    v.CantidadProducto,
+    p.PrecioUnitarioReferencial,
+    (v.CantidadProducto * p.PrecioUnitarioReferencial) AS MontoTotalCalculado
+FROM FactVentas v
+LEFT JOIN DimTiempo t ON v.TiempoSK = t.TiempoSK
+LEFT JOIN DimSucursal s ON v.SucursalSK = s.SucursalSK
+LEFT JOIN DimCliente c ON v.ClienteSK = c.ClienteSK
+LEFT JOIN DimEmpleado e ON v.EmpleadoSK = e.EmpleadoSK
+LEFT JOIN DimProducto p ON v.ProductoSK = p.ProductoSK;
 
 ## 5. Proceso ETL
 El proyecto SSIS se encuentra en [`etl/proyecto-ssis/ProyectoMuebleria/`](etl/proyecto-ssis/ProyectoMuebleria/). El paquete extrae datos de la base transaccional `Albarran` y los carga en `DW_Albarran`.
@@ -99,7 +318,7 @@ El proyecto SSIS se encuentra en [`etl/proyecto-ssis/ProyectoMuebleria/`](etl/pr
 El flujo carga las dimensiones antes de la tabla de hechos para que las claves foráneas estén disponibles. En la carga de hechos se resuelven las claves de negocio hacia las claves subrogadas. La dimensión de tiempo usa la clave `YYYYMMDD`, compartida entre la dimensión y los hechos.
 
 ### Diagrama de proceso ETL
-
+![Diagrama de proceso ETL](etl/proyecto-ssis/modeloETL.png)
 
 
 ### Transformaciones documentadas
@@ -117,15 +336,13 @@ El flujo carga las dimensiones antes de la tabla de hechos para que las claves f
 
 El cubo OLAP debe permitir analizar los KPI definidos mediante las dimensiones de tiempo, cliente, producto, empleado y sucursal del Data Warehouse. El proyecto SSAS se debe incluir en `olap/proyecto-ssas/`.
 
-### Imagen donde se muestra el CUBO
 
-### Imagen de verificación de funcionamiento del CUBO
 
 ## 8. Dashboard Power BI
 
 El dashboard está destinado al propietario de la mueblería y debe presentar los KPI de ventas netas, unidades vendidas, ticket promedio y descuento promedio, con filtros para analizar los resultados por tiempo, sucursal, producto, vendedor y cliente. El archivo de Power BI se debe incluir en `powerbi/`.
 
-### Imagen del Dashboard
+
 
 
 # ---------------------- DOCUMENTACION ---------------------- 
