@@ -67,7 +67,7 @@ Las dimensiones de cliente, producto, empleado y sucursal tienen una clave subro
 | `DimProducto` | `ProductoSK`, `ProductoID_BK`, `NombreProducto`, `NombreCategoria`, `PrecioUnitarioReferencial` |
 | `DimEmpleado` | `EmpleadoSK`, `EmpleadoID_BK`, `NombreCompletoEmpleado`, `NombreCargo`, `FechaContratoEmpleado` |
 | `DimSucursal` | `SucursalSK`, `SucursalID_BK`, `NombreSucursal`, `NombreComuna` |
-| `DimTiempo` | `TiempoSK`, `Fecha`, `Anio`, `Trimestre`, `NumeroMes`, `NombreMes`, `NumeroDia`, `NombreDiaSemana` |
+| `DimTiempo` | `TiempoSK`, `Fecha`, `Anio`, `NumeroTrimestre`, `NumeroMes`, `NombreMes`, `NumeroDia` |
 
 ### Tabla de hechos
 
