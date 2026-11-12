@@ -8,7 +8,7 @@
     <TransactionalDeployment>false</TransactionalDeployment>
     <PartitionDeployment>DeployPartitions</PartitionDeployment>
     <RoleDeployment>DeployRolesRetainMembers</RoleDeployment>
-    <ProcessingOption>DoNotProcess</ProcessingOption>
+    <ProcessingOption>Default</ProcessingOption>
     <OutputScript></OutputScript>
     <ImpactAnalysisFile></ImpactAnalysisFile>
     <ConfigurationSettingsDeployment>Deploy</ConfigurationSettingsDeployment>
@@ -19,63 +19,63 @@
     <ObjectSnapshots>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.RelationalDataSource</Type>
-        <TimeStamp>uSPLtusGjBdTLN6x0iGjm/+29/o=10-11-2026 10:01:2410-11-2026 10:01:24</TimeStamp>
+        <TimeStamp>uSPLtusGjBdTLN6x0iGjm/+29/o=11-11-2026 21:40:2511-11-2026 21:40:25</TimeStamp>
         <ID>
           <String>DW Albarran</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.DataSourceView</Type>
-        <TimeStamp>z4b7UIiVa5PK/faoayEd7NiAEPQ=10-11-2026 10:02:1510-11-2026 10:02:15</TimeStamp>
+        <TimeStamp>z4b7UIiVa5PK/faoayEd7NiAEPQ=11-11-2026 21:40:2511-11-2026 21:40:25</TimeStamp>
         <ID>
           <String>DW Albarran</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>TtdqgOlYmEJMGjDVmcMj/FOc+F0=10-11-2026 10:09:3310-11-2026 10:05:54</TimeStamp>
+        <TimeStamp>TtdqgOlYmEJMGjDVmcMj/FOc+F0=11-11-2026 21:40:2511-11-2026 21:40:25</TimeStamp>
         <ID>
           <String>Dim Empleado</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>Aea9mzVKO0Uocg6TsTu14DiXD3A=10-11-2026 10:09:3310-11-2026 10:05:54</TimeStamp>
+        <TimeStamp>FOxqXXLknZesC7s39+KJ4LjVubE=11-11-2026 22:13:0411-11-2026 21:40:25</TimeStamp>
         <ID>
           <String>Dim Tiempo</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>f/cR9vk0m1epBCQJm1eI6S9LsVc=10-11-2026 10:09:3310-11-2026 10:05:54</TimeStamp>
+        <TimeStamp>f/cR9vk0m1epBCQJm1eI6S9LsVc=11-11-2026 21:40:2511-11-2026 21:40:25</TimeStamp>
         <ID>
           <String>Dim Producto</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>TX1a1MpRYpV7rxeLX41wwgYzKG4=10-11-2026 10:09:3310-11-2026 10:05:54</TimeStamp>
+        <TimeStamp>TX1a1MpRYpV7rxeLX41wwgYzKG4=11-11-2026 21:40:2511-11-2026 21:40:25</TimeStamp>
         <ID>
           <String>Dim Cliente</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>v/ruN0xi09aTX1eA+ILwbBg6Iug=10-11-2026 10:09:3310-11-2026 10:05:54</TimeStamp>
+        <TimeStamp>v/ruN0xi09aTX1eA+ILwbBg6Iug=11-11-2026 21:40:2511-11-2026 21:40:25</TimeStamp>
         <ID>
           <String>Dim Sucursal</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Dimension</Type>
-        <TimeStamp>Ns0CD9pHnBVyd3PQp+HIVPQvlGg=10-11-2026 10:25:4710-11-2026 10:05:54</TimeStamp>
+        <TimeStamp>Ns0CD9pHnBVyd3PQp+HIVPQvlGg=11-11-2026 21:40:2511-11-2026 21:40:25</TimeStamp>
         <ID>
           <String>Fact Ventas</String>
         </ID>
       </ObjectSnapshot>
       <ObjectSnapshot>
         <Type>Microsoft.AnalysisServices.Cube</Type>
-        <TimeStamp>LXxO+shr/5lrlR5PiTB+8fSsoKU=10-11-2026 10:50:4610-11-2026 10:05:54gBIqGezJliNYf53Wnamd+uLGhPc=10-11-2026 10:05:5410-11-2026 10:05:54</TimeStamp>
+        <TimeStamp>cU1w8++FRiPo+qQkAhj7VjUURaE=11-11-2026 22:13:0211-11-2026 21:40:25gBIqGezJliNYf53Wnamd+uLGhPc=11-11-2026 21:40:2511-11-2026 21:40:25</TimeStamp>
         <ID>
           <String>DW Albarran</String>
         </ID>
@@ -83,7 +83,7 @@
     </ObjectSnapshots>
     <DatabaseSnapshot>
       <Type>Microsoft.AnalysisServices.Database</Type>
-      <TimeStamp>TdZY1SXkG9zZaDQwLkcp+0+4tUc=10-11-2026 9:59:2610-11-2026 9:59:25</TimeStamp>
+      <TimeStamp>TdZY1SXkG9zZaDQwLkcp+0+4tUc=11-11-2026 21:40:2511-11-2026 21:40:25</TimeStamp>
       <ID>
         <String>ProyectoMuebleriaSSAS</String>
       </ID>
@@ -92,5 +92,5 @@
   </Snapshot>
   <AssemblyLocations />
   <ProcessingComplete>true</ProcessingComplete>
-  <LastDeployed>2026-11-10T13:50:48.4Z</LastDeployed>
+  <LastDeployed>2026-11-12T01:18:11.13Z</LastDeployed>
 </DeploymentSnapshot>
