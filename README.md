@@ -86,11 +86,18 @@ Las dimensiones de cliente, producto, empleado y sucursal tienen una clave subro
 
 ![Diagrama estrella del Data Warehouse](modelo_dimensional/diagrama_estrella_dw.png)
 
-### Script de creación del DW
+## Construcción del Data Warehouse
+### a. Restauración de la Base de Datos Original (Albarran.bak)
+Se cargó el archivo de respaldo original de la mueblería en SQL Server Management Studio (SSMS) mediante una operación de restauración, lo que permitió disponer de toda la data transaccional cruda del negocio como punto de partida.
 
-### Script de insercción de datos al DW
+### b. Diseño y Creación del Esquema del Data Warehouse
+Se estructuró el modelo dimensional compuesto por una tabla central de hechos (FactVentas) que almacena las métricas clave (MontoTotalVenta, CantidadProducto), conectada directamente a sus respectivas dimensiones (DimTiempo, DimCliente, DimEmpleado, DimSucursal y DimProducto) para dar el contexto analítico.
 
-### Script de verificación de datos
+### c. Proceso de Inserción de Datos
+Se ejecutaron los scripts de poblamiento para transformar y trasladar la información hacia el nuevo esquema, asegurando la asignación correcta de claves subrogadas (SK) y el manejo adecuado de atributos temporales (como el ordenamiento numérico de los meses).
+
+### d. Validación y Verificación de la Carga
+Se corrieron consultas de control y scripts de verificación para contrastar los montos totales y comprobar que la integridad referencial entre la tabla de hechos y las dimensiones fuera exacta y sin pérdida de datos.
 
 
 ## 5. Proceso ETL
@@ -115,20 +122,35 @@ El flujo carga las dimensiones antes de la tabla de hechos para que las claves f
 
 ## 7. Cubo OLAP
 
-El cubo OLAP debe permitir analizar los KPI definidos mediante las dimensiones de tiempo, cliente, producto, empleado y sucursal del Data Warehouse. El proyecto SSAS se debe incluir en `olap/proyecto-ssas/`.
+### a. Conexión y Vista de Origen de Datos (DSV):
+Se creó el proyecto multidimensional en Visual Studio (Analysis Services) y se estableció la conexión directa al Data Warehouse de la mueblería en SQL Server. A partir de ahí, se generó la Vista de Origen de Datos importando el modelo estrella (FactVentas y todas sus tablas de dimensiones) para mapear las relaciones en el entorno analítico.   
 
-### Imagen donde se muestra el CUBO
-
-### Imagen de verificación de funcionamiento del CUBO
+### b. Configuración de Dimensiones y Jerarquías:
+Se construyeron las dimensiones del cubo (DimTiempo, DimProducto, DimSucursal, DimEmpleado, DimCliente) exponiendo los atributos necesarios para el análisis.
+  
+### c. Definición de Medidas y Cálculos MDX:
+Se estructuró el cubo integrando las métricas base desde la tabla de hechos (MontoTotalVenta, CantidadProducto) y se programaron miembros calculados mediante expresiones MDX para obtener indicadores de negocio clave como el TicketPromedio y DescuentoPromedio definido anteriormente.
+  
+### d. Implementación (Deploy) y Procesamiento del Cubo: 
+Se compiló e implementó la solución en el servidor local de Analysis Services (localhost), procesando las estructuras y cargando los datos en memoria para dejar el cubo operativo y listo para ser consumido en vivo (Live Connection) desde Power BI. 
 
 ## 8. Dashboard Power BI
 
-El dashboard está destinado al propietario de la mueblería y debe presentar los KPI de ventas netas, unidades vendidas, ticket promedio y descuento promedio, con filtros para analizar los resultados por tiempo, sucursal, producto, vendedor y cliente. El archivo de Power BI se debe incluir en `powerbi/`.
+### a. Conexión en Vivo (Live Connection) al Cubo SSAS: 
+Se conectó Power BI Desktop directamente a la instancia local de Analysis Services, consumiendo en tiempo real el modelo multidimensional, sus jerarquías y los miembros calculados previamente definidos sin duplicar datos.
 
-### Imagen del Dashboard
+### b. Definición de Tarjetas KPI (Indicadores Clave)
+En la zona superior se implementaron tarjetas de resumen ejecutivo para monitorear de un vistazo el rendimiento global del negocio: Monto Total Venta, Cantidad Producto, TicketPromedio y DescuentoPromedio.
 
+### c. Análisis Visual por Dimensiones: 
+Se desarrollaron gráficos comparativos para desglosar los ingresos según los ejes principales de la mueblería: ventas por producto, evolución mensual, rendimiento de ventas por vendedor y ventas por sucursal en un grafico de anillo, complementados con tablas de detalle de productos y clientes.
 
-# ---------------------- DOCUMENTACION ---------------------- 
+### d. Segmentación e Interactividad: 
+Se integró un panel lateral de filtros desplegables (Nombre Completo Cliente, Nombre Sucursal, Numero Mes y Nombre Producto) que permiten cruzar información dinámicamente y analizar escenarios específicos en todo el reporte.
+
+### Imagen dashboard
+
+# ------------------- DOCUMENTACIÓN ------------------- 
 
 ## 1. Tecnologías y estructura del repositorio
 
@@ -156,9 +178,11 @@ README.md                         Documentación del proyecto
 4. Para ejecutar el ETL, abrir [`ProyectoMuebleria.sln`](etl/proyecto-ssis/ProyectoMuebleria/ProyectoMuebleria.sln) en Visual Studio con la extensión de proyectos SSIS. Verificar las conexiones de origen `Albarran` y destino `DW_Albarran`, y ejecutar el paquete.
 5. Ejecutar las consultas de la sección **Validación de la carga** y guardar los resultados de la comprobación.
 
-# ---------------------- Responsabilidades y los principales aportes de cada  integrante ---------------------- 
+# ------------- Responsabilidades y los principales aportes de cada  integrante ------------ 
 
-1.Gabriel Molina: Construcción de ETL y las consultas de recepción de datos, revisón y edición del archivo README.md.
-2.Macarena Mogollón: Construcción del DW y consultas SQL de insercción y verificación de datos. Construcción cubo OLAP mediante SQL Server Analysis Services y sus KPI. Revisón y edición del archivo README.md.
-3.Lukas Cordova: Validar la salida de los datos en la aplicación PowerBI.
-4.Daniel González: Revisar archivo README.md, verificar los scripts SQL.
+| Integrante | Aporte |
+|---|---|
+| Gabriel Molina | Construcción de ETL y las consultas de recepción de datos, revisón y edición del archivo README.md. |
+| Macarena Mogollón | Construcción del DW y consultas SQL de insercción y verificación de datos. Construcción cubo OLAP mediante SQL Server Analysis Services y sus KPI. Creacion de dashboard de powerbi con datos cargados anteriormente del cubo olap. Revisón y edición del archivo README.md. |
+| Lukas Cordova | Cliente, producto, empleado, sucursal y tiempo. |
+| Daniel González | Revisar archivo README.md |
