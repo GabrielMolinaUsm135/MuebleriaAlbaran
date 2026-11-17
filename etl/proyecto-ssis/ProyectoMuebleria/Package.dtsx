@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="33"
-  DTS:VersionGUID="{51A6C37D-61FC-47F7-B3EB-8D82B20D8986}">
+  DTS:VersionBuild="36"
+  DTS:VersionGUID="{57F4E245-3903-49BA-84F9-87E1E520B1F8}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -868,7 +868,7 @@ INNER JOIN categorias c ON p.categoria_id = c.categoria_id;</property>
                 <property
                   dataType="System.String"
                   description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
-                  name="FastLoadOptions">CHECK_CONSTRAINTS</property>
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
@@ -895,53 +895,39 @@ INNER JOIN categorias c ON p.categoria_id = c.categoria_id;</property>
                       cachedDataType="dbDate"
                       cachedName="Fecha"
                       externalMetadataColumnId="Package\Dimension Tiempo\Destino Tiempo.Inputs[OLE DB Destination Input].ExternalColumns[Fecha]"
-                      lineageId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Fecha]" />
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].Columns[Fecha]" />
                     <inputColumn
                       refId="Package\Dimension Tiempo\Destino Tiempo.Inputs[OLE DB Destination Input].Columns[Anio]"
                       cachedDataType="i4"
                       cachedName="Anio"
                       externalMetadataColumnId="Package\Dimension Tiempo\Destino Tiempo.Inputs[OLE DB Destination Input].ExternalColumns[Anio]"
-                      lineageId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Anio]" />
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].Columns[Anio]" />
                     <inputColumn
-                      refId="Package\Dimension Tiempo\Destino Tiempo.Inputs[OLE DB Destination Input].Columns[Trimestre]"
+                      refId="Package\Dimension Tiempo\Destino Tiempo.Inputs[OLE DB Destination Input].Columns[NumeroTrimestre]"
                       cachedDataType="i4"
-                      cachedName="Trimestre"
-                      externalMetadataColumnId="Package\Dimension Tiempo\Destino Tiempo.Inputs[OLE DB Destination Input].ExternalColumns[Trimestre]"
-                      lineageId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Trimestre]" />
+                      cachedName="NumeroTrimestre"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Destino Tiempo.Inputs[OLE DB Destination Input].ExternalColumns[NumeroTrimestre]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].Columns[NumeroTrimestre]" />
                     <inputColumn
                       refId="Package\Dimension Tiempo\Destino Tiempo.Inputs[OLE DB Destination Input].Columns[NumeroMes]"
                       cachedDataType="i4"
                       cachedName="NumeroMes"
                       externalMetadataColumnId="Package\Dimension Tiempo\Destino Tiempo.Inputs[OLE DB Destination Input].ExternalColumns[NumeroMes]"
-                      lineageId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].Columns[NumeroMes]" />
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].Columns[NumeroMes]" />
+                    <inputColumn
+                      refId="Package\Dimension Tiempo\Destino Tiempo.Inputs[OLE DB Destination Input].Columns[NombreMes]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="NombreMes"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Destino Tiempo.Inputs[OLE DB Destination Input].ExternalColumns[NombreMes]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].Columns[NombreMes]" />
                     <inputColumn
                       refId="Package\Dimension Tiempo\Destino Tiempo.Inputs[OLE DB Destination Input].Columns[NumeroDia]"
                       cachedDataType="i4"
                       cachedName="NumeroDia"
                       externalMetadataColumnId="Package\Dimension Tiempo\Destino Tiempo.Inputs[OLE DB Destination Input].ExternalColumns[NumeroDia]"
-                      lineageId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].Columns[NumeroDia]" />
-                    <inputColumn
-                      refId="Package\Dimension Tiempo\Destino Tiempo.Inputs[OLE DB Destination Input].Columns[TiempoSK]"
-                      cachedDataType="i4"
-                      cachedName="TiempoSK"
-                      externalMetadataColumnId="Package\Dimension Tiempo\Destino Tiempo.Inputs[OLE DB Destination Input].ExternalColumns[TiempoSK]"
-                      lineageId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].Columns[TiempoSK]" />
-                    <inputColumn
-                      refId="Package\Dimension Tiempo\Destino Tiempo.Inputs[OLE DB Destination Input].Columns[NombreMes]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="20"
-                      cachedName="NombreMes"
-                      externalMetadataColumnId="Package\Dimension Tiempo\Destino Tiempo.Inputs[OLE DB Destination Input].ExternalColumns[NombreMes]"
-                      lineageId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].Columns[NombreMes]" />
-                    <inputColumn
-                      refId="Package\Dimension Tiempo\Destino Tiempo.Inputs[OLE DB Destination Input].Columns[NombreDiaSemana]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="20"
-                      cachedName="NombreDiaSemana"
-                      externalMetadataColumnId="Package\Dimension Tiempo\Destino Tiempo.Inputs[OLE DB Destination Input].ExternalColumns[NombreDiaSemana]"
-                      lineageId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].Columns[NombreDiaSemana]" />
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].Columns[NumeroDia]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -958,9 +944,9 @@ INNER JOIN categorias c ON p.categoria_id = c.categoria_id;</property>
                       dataType="i4"
                       name="Anio" />
                     <externalMetadataColumn
-                      refId="Package\Dimension Tiempo\Destino Tiempo.Inputs[OLE DB Destination Input].ExternalColumns[Trimestre]"
+                      refId="Package\Dimension Tiempo\Destino Tiempo.Inputs[OLE DB Destination Input].ExternalColumns[NumeroTrimestre]"
                       dataType="i4"
-                      name="Trimestre" />
+                      name="NumeroTrimestre" />
                     <externalMetadataColumn
                       refId="Package\Dimension Tiempo\Destino Tiempo.Inputs[OLE DB Destination Input].ExternalColumns[NumeroMes]"
                       dataType="i4"
@@ -969,18 +955,12 @@ INNER JOIN categorias c ON p.categoria_id = c.categoria_id;</property>
                       refId="Package\Dimension Tiempo\Destino Tiempo.Inputs[OLE DB Destination Input].ExternalColumns[NombreMes]"
                       codePage="1252"
                       dataType="str"
-                      length="20"
+                      length="50"
                       name="NombreMes" />
                     <externalMetadataColumn
                       refId="Package\Dimension Tiempo\Destino Tiempo.Inputs[OLE DB Destination Input].ExternalColumns[NumeroDia]"
                       dataType="i4"
                       name="NumeroDia" />
-                    <externalMetadataColumn
-                      refId="Package\Dimension Tiempo\Destino Tiempo.Inputs[OLE DB Destination Input].ExternalColumns[NombreDiaSemana]"
-                      codePage="1252"
-                      dataType="str"
-                      length="20"
-                      name="NombreDiaSemana" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -1010,11 +990,11 @@ INNER JOIN categorias c ON p.categoria_id = c.categoria_id;</property>
               </outputs>
             </component>
             <component
-              refId="Package\Dimension Tiempo\OLE DB Source"
+              refId="Package\Dimension Tiempo\Origen Tiempo"
               componentClassID="Microsoft.OLEDBSource"
               contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
               description="OLE DB Source"
-              name="OLE DB Source"
+              name="Origen Tiempo"
               usesDispositions="true"
               version="7">
               <properties>
@@ -1035,15 +1015,14 @@ INNER JOIN categorias c ON p.categoria_id = c.categoria_id;</property>
                   description="The SQL command to be executed."
                   name="SqlCommand"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT
-       CAST(CONVERT(VARCHAR(8), fecha, 112) AS INT)  AS TiempoSK,
-       CAST(fecha AS DATE)                           AS Fecha,
-       YEAR(fecha)                                   AS Anio,
-       DATEPART(QUARTER, fecha)                      AS Trimestre,
-       MONTH(fecha)                                  AS NumeroMes,
-       CAST(DATENAME(MONTH, fecha)   AS VARCHAR(20)) AS NombreMes,
-       DAY(fecha)                                    AS NumeroDia,
-       CAST(DATENAME(WEEKDAY, fecha) AS VARCHAR(20)) AS NombreDiaSemana
-   FROM ventas;</property>
+    CAST(fecha AS DATE)                       AS Fecha,
+    YEAR(fecha)                               AS Anio,
+    DATEPART(QUARTER, fecha)                  AS NumeroTrimestre,
+    MONTH(fecha)                              AS NumeroMes,
+    CAST(DATENAME(MONTH, fecha) AS VARCHAR(50)) AS NombreMes,
+    DAY(fecha)                                AS NumeroDia
+FROM ventas
+WHERE fecha IS NOT NULL;</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1068,7 +1047,7 @@ INNER JOIN categorias c ON p.categoria_id = c.categoria_id;</property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\Dimension Tiempo\OLE DB Source.Connections[OleDbConnection]"
+                  refId="Package\Dimension Tiempo\Origen Tiempo.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[LocalHost.Albarran]"
                   connectionManagerRefId="Package.ConnectionManagers[LocalHost.Albarran]"
                   description="The OLE DB runtime connection used to access the database."
@@ -1076,185 +1055,143 @@ INNER JOIN categorias c ON p.categoria_id = c.categoria_id;</property>
               </connections>
               <outputs>
                 <output
-                  refId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output]"
+                  refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output]"
                   name="OLE DB Source Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].Columns[TiempoSK]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TiempoSK]"
-                      lineageId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].Columns[TiempoSK]"
-                      name="TiempoSK"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Fecha]"
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].Columns[Fecha]"
                       dataType="dbDate"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Fecha]"
-                      lineageId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Fecha]"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].ExternalColumns[Fecha]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].Columns[Fecha]"
                       name="Fecha"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Anio]"
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].Columns[Anio]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Anio]"
-                      lineageId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Anio]"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].ExternalColumns[Anio]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].Columns[Anio]"
                       name="Anio"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Trimestre]"
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].Columns[NumeroTrimestre]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Trimestre]"
-                      lineageId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].Columns[Trimestre]"
-                      name="Trimestre"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].ExternalColumns[NumeroTrimestre]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].Columns[NumeroTrimestre]"
+                      name="NumeroTrimestre"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].Columns[NumeroMes]"
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].Columns[NumeroMes]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NumeroMes]"
-                      lineageId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].Columns[NumeroMes]"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].ExternalColumns[NumeroMes]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].Columns[NumeroMes]"
                       name="NumeroMes"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].Columns[NombreMes]"
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].Columns[NombreMes]"
                       codePage="1252"
                       dataType="str"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NombreMes]"
-                      length="20"
-                      lineageId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].Columns[NombreMes]"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].ExternalColumns[NombreMes]"
+                      length="50"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].Columns[NombreMes]"
                       name="NombreMes"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].Columns[NumeroDia]"
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].Columns[NumeroDia]"
                       dataType="i4"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NumeroDia]"
-                      lineageId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].Columns[NumeroDia]"
+                      externalMetadataColumnId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].ExternalColumns[NumeroDia]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].Columns[NumeroDia]"
                       name="NumeroDia"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].Columns[NombreDiaSemana]"
-                      codePage="1252"
-                      dataType="str"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NombreDiaSemana]"
-                      length="20"
-                      lineageId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].Columns[NombreDiaSemana]"
-                      name="NombreDiaSemana"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TiempoSK]"
-                      dataType="i4"
-                      name="TiempoSK" />
-                    <externalMetadataColumn
-                      refId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Fecha]"
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].ExternalColumns[Fecha]"
                       dataType="dbDate"
                       name="Fecha" />
                     <externalMetadataColumn
-                      refId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Anio]"
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].ExternalColumns[Anio]"
                       dataType="i4"
                       name="Anio" />
                     <externalMetadataColumn
-                      refId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Trimestre]"
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].ExternalColumns[NumeroTrimestre]"
                       dataType="i4"
-                      name="Trimestre" />
+                      name="NumeroTrimestre" />
                     <externalMetadataColumn
-                      refId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NumeroMes]"
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].ExternalColumns[NumeroMes]"
                       dataType="i4"
                       name="NumeroMes" />
                     <externalMetadataColumn
-                      refId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NombreMes]"
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].ExternalColumns[NombreMes]"
                       codePage="1252"
                       dataType="str"
-                      length="20"
+                      length="50"
                       name="NombreMes" />
                     <externalMetadataColumn
-                      refId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NumeroDia]"
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output].ExternalColumns[NumeroDia]"
                       dataType="i4"
                       name="NumeroDia" />
-                    <externalMetadataColumn
-                      refId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NombreDiaSemana]"
-                      codePage="1252"
-                      dataType="str"
-                      length="20"
-                      name="NombreDiaSemana" />
                   </externalMetadataColumns>
                 </output>
                 <output
-                  refId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Error Output]"
                   isErrorOut="true"
                   name="OLE DB Source Error Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TiempoSK]"
-                      dataType="i4"
-                      lineageId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TiempoSK]"
-                      name="TiempoSK" />
-                    <outputColumn
-                      refId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Fecha]"
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Error Output].Columns[Fecha]"
                       dataType="dbDate"
-                      lineageId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Fecha]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Error Output].Columns[Fecha]"
                       name="Fecha" />
                     <outputColumn
-                      refId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Anio]"
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Error Output].Columns[Anio]"
                       dataType="i4"
-                      lineageId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Anio]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Error Output].Columns[Anio]"
                       name="Anio" />
                     <outputColumn
-                      refId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Trimestre]"
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Error Output].Columns[NumeroTrimestre]"
                       dataType="i4"
-                      lineageId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Trimestre]"
-                      name="Trimestre" />
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Error Output].Columns[NumeroTrimestre]"
+                      name="NumeroTrimestre" />
                     <outputColumn
-                      refId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NumeroMes]"
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Error Output].Columns[NumeroMes]"
                       dataType="i4"
-                      lineageId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NumeroMes]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Error Output].Columns[NumeroMes]"
                       name="NumeroMes" />
                     <outputColumn
-                      refId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NombreMes]"
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Error Output].Columns[NombreMes]"
                       codePage="1252"
                       dataType="str"
-                      length="20"
-                      lineageId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NombreMes]"
+                      length="50"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Error Output].Columns[NombreMes]"
                       name="NombreMes" />
                     <outputColumn
-                      refId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NumeroDia]"
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Error Output].Columns[NumeroDia]"
                       dataType="i4"
-                      lineageId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NumeroDia]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Error Output].Columns[NumeroDia]"
                       name="NumeroDia" />
                     <outputColumn
-                      refId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NombreDiaSemana]"
-                      codePage="1252"
-                      dataType="str"
-                      length="20"
-                      lineageId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NombreDiaSemana]"
-                      name="NombreDiaSemana" />
-                    <outputColumn
-                      refId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      refId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1268,7 +1205,7 @@ INNER JOIN categorias c ON p.categoria_id = c.categoria_id;</property>
               refId="Package\Dimension Tiempo.Paths[OLE DB Source Output]"
               endId="Package\Dimension Tiempo\Destino Tiempo.Inputs[OLE DB Destination Input]"
               name="OLE DB Source Output"
-              startId="Package\Dimension Tiempo\OLE DB Source.Outputs[OLE DB Source Output]" />
+              startId="Package\Dimension Tiempo\Origen Tiempo.Outputs[OLE DB Source Output]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -2257,24 +2194,25 @@ INNER JOIN cargos c ON e.cargo_id = c.cargo_id;</property>
                   description="The SQL command to be executed."
                   name="SqlCommand"
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
-    v.venta_id                                         AS VentaID_BK,
+    v.venta_id                                          AS VentaID_BK,
     dp.ProductoSK,
     dc.ClienteSK,
     de.EmpleadoSK,
     ds.SucursalSK,
-    CAST(CONVERT(VARCHAR(8), v.fecha, 112) AS INT)     AS TiempoSK,
-    CAST(v.numero_documento AS VARCHAR(50))            AS NumeroDocumento,
-    CAST(v.tipo_documento   AS VARCHAR(50))            AS TipoDocumento,
-    dv.cantidad                                        AS CantidadProducto,
-    CAST(dv.precio_unitario AS DECIMAL(12,2))          AS PrecioUnitarioProducto,
-    CAST(dv.descuento       AS DECIMAL(12,2))          AS DescuentoProducto,
-    CAST(dv.cantidad * dv.precio_unitario AS DECIMAL(12,2)) AS MontoTotalVenta
+    dt.TiempoSK,
+    CAST(v.numero_documento AS VARCHAR(50))             AS NumeroDocumento,
+    CAST(v.tipo_documento   AS VARCHAR(50))             AS TipoDocumento,
+    dv.cantidad                                         AS CantidadProducto,
+    CAST(dv.precio_unitario AS DECIMAL(18,2))           AS PrecioUnitarioProducto,
+    CAST(ISNULL(dv.descuento, 0) AS DECIMAL(18,2))      AS DescuentoProducto,
+    CAST(dv.cantidad * dv.precio_unitario - ISNULL(dv.descuento, 0) AS DECIMAL(18,2)) AS MontoTotalVenta
 FROM ventas v
 INNER JOIN detalle_ventas dv ON v.venta_id = dv.venta_id
 INNER JOIN DW_Albarran.dbo.DimProducto  dp ON dp.ProductoID_BK  = dv.producto_id
 INNER JOIN DW_Albarran.dbo.DimCliente   dc ON dc.ClienteID_BK   = v.cliente_id
 INNER JOIN DW_Albarran.dbo.DimEmpleado  de ON de.EmpleadoID_BK  = v.vendedor_id
-INNER JOIN DW_Albarran.dbo.DimSucursal  ds ON ds.SucursalID_BK  = v.sucursal_id;</property>
+INNER JOIN DW_Albarran.dbo.DimSucursal  ds ON ds.SucursalID_BK  = v.sucursal_id
+INNER JOIN DW_Albarran.dbo.DimTiempo    dt ON dt.Fecha          = CAST(v.fecha AS DATE);</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -2475,19 +2413,19 @@ INNER JOIN DW_Albarran.dbo.DimSucursal  ds ON ds.SucursalID_BK  = v.sucursal_id;
                       refId="Package\Hechos Ventas\Origen Hecho de venta.Outputs[OLE DB Source Output].ExternalColumns[PrecioUnitarioProducto]"
                       dataType="numeric"
                       name="PrecioUnitarioProducto"
-                      precision="12"
+                      precision="18"
                       scale="2" />
                     <externalMetadataColumn
                       refId="Package\Hechos Ventas\Origen Hecho de venta.Outputs[OLE DB Source Output].ExternalColumns[DescuentoProducto]"
                       dataType="numeric"
                       name="DescuentoProducto"
-                      precision="12"
+                      precision="18"
                       scale="2" />
                     <externalMetadataColumn
                       refId="Package\Hechos Ventas\Origen Hecho de venta.Outputs[OLE DB Source Output].ExternalColumns[MontoTotalVenta]"
                       dataType="numeric"
                       name="MontoTotalVenta"
-                      precision="12"
+                      precision="18"
                       scale="2" />
                   </externalMetadataColumns>
                 </output>
@@ -2550,21 +2488,21 @@ INNER JOIN DW_Albarran.dbo.DimSucursal  ds ON ds.SucursalID_BK  = v.sucursal_id;
                       dataType="numeric"
                       lineageId="Package\Hechos Ventas\Origen Hecho de venta.Outputs[OLE DB Source Error Output].Columns[PrecioUnitarioProducto]"
                       name="PrecioUnitarioProducto"
-                      precision="12"
+                      precision="18"
                       scale="2" />
                     <outputColumn
                       refId="Package\Hechos Ventas\Origen Hecho de venta.Outputs[OLE DB Source Error Output].Columns[DescuentoProducto]"
                       dataType="numeric"
                       lineageId="Package\Hechos Ventas\Origen Hecho de venta.Outputs[OLE DB Source Error Output].Columns[DescuentoProducto]"
                       name="DescuentoProducto"
-                      precision="12"
+                      precision="18"
                       scale="2" />
                     <outputColumn
                       refId="Package\Hechos Ventas\Origen Hecho de venta.Outputs[OLE DB Source Error Output].Columns[MontoTotalVenta]"
                       dataType="numeric"
                       lineageId="Package\Hechos Ventas\Origen Hecho de venta.Outputs[OLE DB Source Error Output].Columns[MontoTotalVenta]"
                       name="MontoTotalVenta"
-                      precision="12"
+                      precision="18"
                       scale="2" />
                     <outputColumn
                       refId="Package\Hechos Ventas\Origen Hecho de venta.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
@@ -2824,7 +2762,7 @@ INNER JOIN DW_Albarran.dbo.DimSucursal  ds ON ds.SucursalID_BK  = v.sucursal_id;
     design-time-name="Package\Dimension Clientes">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="148,42.6666666666667"
           Id="Package\Dimension Clientes\Origen Cliente"
@@ -2852,7 +2790,9 @@ INNER JOIN DW_Albarran.dbo.DimSucursal  ds ON ds.SucursalID_BK  = v.sucursal_id;
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -2888,15 +2828,15 @@ INNER JOIN DW_Albarran.dbo.DimSucursal  ds ON ds.SucursalID_BK  = v.sucursal_id;
     design-time-name="Package\Dimension Producto">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="157.333333333334,42.6666666666667"
-          Id="Package\Dimension Producto\Origen Producto"
-          TopLeft="132.8,178.4" />
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="161.333333333334,42.6666666666667"
           Id="Package\Dimension Producto\Destino Producto"
           TopLeft="454,179.2" />
+        <NodeLayout
+          Size="157.333333333334,42.6666666666667"
+          Id="Package\Dimension Producto\Origen Producto"
+          TopLeft="132.8,178.4" />
         <EdgeLayout
           Id="Package\Dimension Producto.Paths[OLE DB Source Output]"
           TopLeft="290.133333333333,200.133333333333">
@@ -2916,52 +2856,16 @@ INNER JOIN DW_Albarran.dbo.DimSucursal  ds ON ds.SucursalID_BK  = v.sucursal_id;
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <TaskHost
-    design-time-name="Package\Dimension Tiempo">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="154.666666666667,42.6666666666667"
-          Id="Package\Dimension Tiempo\Destino Tiempo"
-          TopLeft="478.233333171904,233.828070179732" />
-        <NodeLayout
-          Size="154.666666666667,42.6666666666667"
-          Id="Package\Dimension Tiempo\OLE DB Source"
-          TopLeft="121.249998193234,239.929829077487" />
-        <EdgeLayout
-          Id="Package\Dimension Tiempo.Paths[OLE DB Source Output]"
-          TopLeft="275.916664859901,258.212282961943">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="202.316668312003,0"
-              Start="0,0"
-              End="194.816668312003,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="194.816668312003,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Dimension Tiempo\Destino Tiempo">
+    design-time-name="Package\Dimension Producto\Destino Producto">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2974,7 +2878,7 @@ INNER JOIN DW_Albarran.dbo.DimSucursal  ds ON ds.SucursalID_BK  = v.sucursal_id;
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Dimension Tiempo\OLE DB Source">
+    design-time-name="Package\Dimension Producto\Origen Producto">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2982,10 +2886,48 @@ INNER JOIN DW_Albarran.dbo.DimSucursal  ds ON ds.SucursalID_BK  = v.sucursal_id;
     </Properties>
   </PipelineComponentMetadata>
   <TaskHost
-    design-time-name="Package\Dimension Ubicacion">
+    design-time-name="Package\Dimension Tiempo">
     <LayoutInfo>
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150.666666666667,42.6666666666667"
+          Id="Package\Dimension Tiempo\Origen Tiempo"
+          TopLeft="118.749998230487,323.63158503893" />
+        <NodeLayout
+          Size="154.666666666667,42.6666666666667"
+          Id="Package\Dimension Tiempo\Destino Tiempo"
+          TopLeft="476.874992894009,322.631584794237" />
+        <EdgeLayout
+          Id="Package\Dimension Tiempo.Paths[OLE DB Source Output]"
+          TopLeft="269.416664897154,344.464918249917">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="207.458327996855,0"
+              Start="0,0"
+              End="199.958327996855,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="199.958327996855,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Dimension Ubicacion">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="161.333333333334,42.6666666666667"
           Id="Package\Dimension Ubicacion\Origen Ubicacion"
@@ -3013,7 +2955,9 @@ INNER JOIN DW_Albarran.dbo.DimSucursal  ds ON ds.SucursalID_BK  = v.sucursal_id;
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -3049,15 +2993,15 @@ INNER JOIN DW_Albarran.dbo.DimSucursal  ds ON ds.SucursalID_BK  = v.sucursal_id;
     design-time-name="Package\Dimension Vendedores">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="172,42.6666666666667"
-          Id="Package\Dimension Vendedores\Origen Vendedores"
-          TopLeft="91.7499987147748,117.02631788868" />
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="176,42.6666666666667"
           Id="Package\Dimension Vendedores\Destino Vendedores"
           TopLeft="408.437493913807,116.657896932638" />
+        <NodeLayout
+          Size="172,42.6666666666667"
+          Id="Package\Dimension Vendedores\Origen Vendedores"
+          TopLeft="91.7499987147748,117.02631788868" />
         <EdgeLayout
           Id="Package\Dimension Vendedores.Paths[OLE DB Source Output]"
           TopLeft="263.749998714775,138.175440743992">
@@ -3077,12 +3021,27 @@ INNER JOIN DW_Albarran.dbo.DimSucursal  ds ON ds.SucursalID_BK  = v.sucursal_id;
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dimension Vendedores\Destino Vendedores">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Dimension Vendedores\Origen Vendedores">
     <Properties>
@@ -3097,13 +3056,13 @@ INNER JOIN DW_Albarran.dbo.DimSucursal  ds ON ds.SucursalID_BK  = v.sucursal_id;
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="189.333333333334,42.6666666666667"
-          Id="Package\Hechos Ventas\Origen Hecho de venta"
-          TopLeft="157.6,203.6" />
-        <NodeLayout
           Size="193.333333333334,42.6666666666667"
           Id="Package\Hechos Ventas\Destino Hecho de venta"
           TopLeft="424,208.4" />
+        <NodeLayout
+          Size="189.333333333334,42.6666666666667"
+          Id="Package\Hechos Ventas\Origen Hecho de venta"
+          TopLeft="157.6,203.6" />
         <EdgeLayout
           Id="Package\Hechos Ventas.Paths[OLE DB Source Output]"
           TopLeft="346.933333333333,227.333333333333">
@@ -3130,28 +3089,7 @@ INNER JOIN DW_Albarran.dbo.DimSucursal  ds ON ds.SucursalID_BK  = v.sucursal_id;
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Dimension Vendedores\Destino Vendedores">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Dimension Producto\Origen Producto">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Dimension Producto\Destino Producto">
+    design-time-name="Package\Hechos Ventas\Destino Hecho de venta">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -3172,7 +3110,15 @@ INNER JOIN DW_Albarran.dbo.DimSucursal  ds ON ds.SucursalID_BK  = v.sucursal_id;
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Hechos Ventas\Destino Hecho de venta">
+    design-time-name="Package\Dimension Tiempo\Origen Tiempo">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dimension Tiempo\Destino Tiempo">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
