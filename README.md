@@ -196,5 +196,5 @@ README.md                         Documentación del proyecto
 |---|---|
 | Gabriel Molina | Construcción de ETL y las consultas de recepción de datos, revisón y edición del archivo README.md. |
 | Macarena Mogollón | Construcción del DW y consultas SQL de insercción y verificación de datos. Construcción cubo OLAP mediante SQL Server Analysis Services y sus KPI. Creacion de dashboard de powerbi con datos cargados anteriormente del cubo olap. Revisón y edición del archivo README.md. |
-| Lukas Cordova | |
+| Lukas Cordova | | Definición de los KPIs, diseño del modelo dimensional, edición del archivo README.md |
 | Daniel González | Revisar archivo README.md |
